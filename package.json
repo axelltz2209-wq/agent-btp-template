@@ -1,0 +1,27 @@
+{
+  "name": "patrick-maconnerie-agents",
+  "version": "1.0.0",
+  "description": "Système d'agents IA pour Patrick Maçonnerie",
+  "type": "module",
+  "main": "cron.js",
+  "scripts": {
+    "start": "node cron.js",
+    "dev": "node --watch cron.js",
+    "test:relance": "node agents/relance-devis.js",
+    "test:ca": "node agents/calcul-ca.js",
+    "test:avis": "node agents/avis-google.js",
+    "test:rentabilite": "node agents/rentabilite-chantier.js",
+    "test:db": "node test-supabase-connection.js",
+    "debug:query": "node debug-devis-query.js"
+  },
+  "keywords": ["ai", "agents", "btp", "automation"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "@supabase/supabase-js": "^2.45.4",
+    "node-cron": "^3.0.3",
+    "node-telegram-bot-api": "^0.66.0",
+    "dotenv": "^16.4.7"
+  }
+}
