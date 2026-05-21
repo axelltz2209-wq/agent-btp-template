@@ -24,4 +24,7 @@ export interface Chantier {
   montant_devis: number
   date_debut: string
   statut: string
+  telephone: string | null
+  heures_travaillees: number | null
+  depenses: number | null
 }
