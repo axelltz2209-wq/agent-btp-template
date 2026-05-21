@@ -129,7 +129,7 @@ async function dailyBriefingAgent() {
     // Générer le briefing avec Claude
     console.log('💬 Génération du briefing quotidien...')
 
-    const prompt = `Tu es l'assistant de Patrick, artisan maçon.
+    const prompt = `Tu es l'assistant d'un entrepreneur du BTP.
 Génère un briefing quotidien concis et motivant pour démarrer la journée.
 
 DEVIS EN ATTENTE (${devisEnAttente?.length || 0}) :

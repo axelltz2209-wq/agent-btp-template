@@ -7,7 +7,7 @@ import avisGoogleAgent from './agents/avis-google.js'
 import rentabiliteChantierAgent from './agents/rentabilite-chantier.js'
 import { envoyerMessage } from './lib/telegram.js'
 
-console.log('🚀 Système d\'agents Patrick Maçonnerie démarré')
+console.log('🚀 Système d\'agents Agent BTP Template démarré')
 console.log('⏰ Configuration des tâches planifiées...\n')
 
 // Agent 1 : Briefing quotidien

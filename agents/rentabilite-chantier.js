@@ -37,7 +37,7 @@ async function genererAnalyseRentabilite(chantier, margeReelle, margePct, status
   const coutMainOeuvre = chantier.heures_travaillees * 45
   const coutTotal = coutMainOeuvre + chantier.depenses
 
-  const prompt = `Tu es l'assistant financier de Patrick, artisan maçon.
+  const prompt = `Tu es l'assistant financier d'un entrepreneur du BTP.
 
 CHANTIER : ${chantier.client_nom}
 • Montant devis : ${chantier.montant_devis}€

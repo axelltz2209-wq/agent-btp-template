@@ -16,34 +16,31 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-[240px] flex flex-col slide-in-left" style={{
-      backgroundColor: 'var(--color-surface)',
-      borderRight: '1px solid var(--color-border-subtle)',
-      boxShadow: 'var(--shadow-xs)'
-    }}>
-      {/* Logo */}
-      <div className="h-20 flex items-center px-6 border-b" style={{ borderColor: 'var(--color-border-subtle)' }}>
+    <aside className="fixed left-0 top-0 h-screen w-[240px] flex flex-col bg-secondary-900 slide-in-left">
+      {/* Logo / Header */}
+      <div className="h-20 flex items-center px-6 border-b border-secondary-800">
         <div className="flex items-center gap-3">
+          {/* Orange square logo with BTP text */}
           <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm transition-transform hover:scale-105"
+            className="w-11 h-11 rounded-lg flex items-center justify-center shadow-md transition-transform hover:scale-105"
             style={{
-              backgroundColor: companyConfig.color,
-              boxShadow: `0 4px 12px ${companyConfig.color}40`
+              backgroundColor: 'var(--color-primary)',
+              boxShadow: '0 0 12px rgba(249, 115, 22, 0.3)'
             }}
           >
-            <span className="text-white font-bold text-base">{companyConfig.avatar}</span>
+            <span className="text-white font-bold text-lg tracking-tight">
+              {companyConfig.avatar}
+            </span>
           </div>
-          <span className="font-semibold text-base" style={{
-            fontFamily: 'var(--font-display)',
-            color: 'var(--color-text-primary)'
-          }}>
+          {/* Company name in white */}
+          <span className="font-semibold text-base text-white font-primary">
             {companyConfig.name}
           </span>
         </div>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-4 py-8">
+      <nav className="flex-1 px-3 py-8">
         <div className="space-y-1">
           <Link href="/" className={getLinkClasses('/')}>
             <svg
@@ -115,26 +112,22 @@ export default function Sidebar() {
         </div>
       </nav>
 
-      {/* Footer */}
-      <div className="px-4 py-5 border-t" style={{ borderColor: 'var(--color-border-subtle)' }}>
-        <div className="flex items-center gap-3 px-3 py-2 rounded-xl transition-all hover:bg-[var(--color-background)] cursor-pointer">
+      {/* User Footer */}
+      <div className="px-4 py-5 border-t border-secondary-800">
+        <div className="flex items-center gap-3 px-3 py-2 rounded-lg transition-all hover:bg-secondary-800 cursor-pointer">
+          {/* User avatar with dark background instead of gradient */}
           <div
-            className="w-10 h-10 rounded-full flex items-center justify-center"
-            style={{
-              background: 'linear-gradient(135deg, var(--color-accent-blue) 0%, var(--color-accent-purple) 100%)',
-              boxShadow: 'var(--shadow-sm)'
-            }}
+            className="w-10 h-10 rounded-full flex items-center justify-center bg-secondary-700 shadow-sm"
           >
-            <span className="text-white font-semibold text-sm">{companyConfig.avatar}</span>
+            <span className="text-white font-semibold text-sm">
+              {companyConfig.avatar}
+            </span>
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-sm font-semibold truncate" style={{
-              fontFamily: 'var(--font-body)',
-              color: 'var(--color-text-primary)'
-            }}>
+            <div className="text-sm font-semibold truncate text-white font-primary">
               {companyConfig.owner}
             </div>
-            <div className="text-xs truncate" style={{ color: 'var(--color-text-tertiary)' }}>
+            <div className="text-xs truncate text-gray-400">
               Administrateur
             </div>
           </div>

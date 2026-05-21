@@ -103,7 +103,7 @@ npm start                  # All 6 agents now active
 Je voulais vous remercier pour votre confiance sur ce
 projet de 14000€. Si vous êtes satisfait du résultat,
 votre avis Google serait très apprécié !
-https://g.page/r/patrick-maconnerie/review
+[VOTRE_LIEN_GOOGLE_REVIEW]
 ```
 
 ---

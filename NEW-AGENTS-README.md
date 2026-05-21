@@ -153,5 +153,5 @@ const coutMainOeuvre = (chantier.heures_travaillees || 0) * 45
 Edit `agents/avis-google.js`:
 ```javascript
 // Update with your actual Google Business link
-'https://g.page/r/patrick-maconnerie/review'
+'[VOTRE_LIEN_GOOGLE_REVIEW]'
 ```

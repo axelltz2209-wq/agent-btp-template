@@ -74,33 +74,34 @@ export default function ChartsSection({ devis, chantiers }: ChartsSectionProps) 
       {/* Line Chart - Evolution des relances */}
       <div className="chart-container scale-in">
         <div className="mb-6">
-          <h3 className="chart-title">
+          <h3 className="text-lg font-bold text-secondary font-primary mb-2">
             Évolution des relances
           </h3>
-          <p className="chart-description">
+          <p className="text-sm text-gray-600">
             Nombre de devis envoyés par jour (30 derniers jours)
           </p>
         </div>
         <ResponsiveContainer width="100%" height={280}>
           <LineChart data={relancesData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" strokeOpacity={0.5} />
-            <XAxis dataKey="date" stroke="#9ca3af" style={{ fontSize: '11px' }} />
-            <YAxis stroke="#9ca3af" style={{ fontSize: '11px' }} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E7E5E0" strokeOpacity={0.8} />
+            <XAxis dataKey="date" stroke="#78716C" style={{ fontSize: '11px', fontFamily: 'Inter' }} />
+            <YAxis stroke="#78716C" style={{ fontSize: '11px', fontFamily: 'Inter' }} />
             <Tooltip
               contentStyle={{
                 backgroundColor: '#ffffff',
-                border: '1px solid #e5e7eb',
+                border: '1px solid #E7E5E0',
                 borderRadius: '8px',
                 fontSize: '13px',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.08)',
+                fontFamily: 'Inter',
               }}
             />
             <Line
               type="monotone"
               dataKey="count"
-              stroke="#2563eb"
+              stroke="#F97316"
               strokeWidth={2.5}
-              dot={{ fill: '#2563eb', r: 4 }}
+              dot={{ fill: '#F97316', r: 4 }}
               activeDot={{ r: 6 }}
               animationDuration={1000}
             />
@@ -111,29 +112,30 @@ export default function ChartsSection({ devis, chantiers }: ChartsSectionProps) 
       {/* Bar Chart - CA previsionnel */}
       <div className="chart-container scale-in" style={{ animationDelay: '0.1s' }}>
         <div className="mb-6">
-          <h3 className="chart-title">
+          <h3 className="text-lg font-bold text-secondary font-primary mb-2">
             Chiffre d'affaires prévisionnel
           </h3>
-          <p className="chart-description">
+          <p className="text-sm text-gray-600">
             Revenus prévus par semaine (4 prochaines semaines)
           </p>
         </div>
         <ResponsiveContainer width="100%" height={280}>
           <BarChart data={caData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" strokeOpacity={0.5} />
-            <XAxis dataKey="week" stroke="#9ca3af" style={{ fontSize: '11px' }} />
-            <YAxis stroke="#9ca3af" style={{ fontSize: '11px' }} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E7E5E0" strokeOpacity={0.8} />
+            <XAxis dataKey="week" stroke="#78716C" style={{ fontSize: '11px', fontFamily: 'Inter' }} />
+            <YAxis stroke="#78716C" style={{ fontSize: '11px', fontFamily: 'Inter' }} />
             <Tooltip
               contentStyle={{
                 backgroundColor: '#ffffff',
-                border: '1px solid #e5e7eb',
+                border: '1px solid #E7E5E0',
                 borderRadius: '8px',
                 fontSize: '13px',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.08)',
+                fontFamily: 'Inter',
               }}
               formatter={(value) => `${Number(value).toLocaleString('fr-FR')}€`}
             />
-            <Bar dataKey="ca" fill="#2563eb" radius={[8, 8, 0, 0]} animationDuration={1000} />
+            <Bar dataKey="ca" fill="#F97316" radius={[8, 8, 0, 0]} animationDuration={1000} />
           </BarChart>
         </ResponsiveContainer>
       </div>

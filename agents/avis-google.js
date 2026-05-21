@@ -31,7 +31,7 @@ async function logAgentActivity(action, status = 'success', details = null) {
  * @returns {Promise<string>} Message SMS généré
  */
 async function genererMessageAvisGoogle(chantier) {
-  const prompt = `Tu es l'assistant de Patrick, artisan maçon.
+  const prompt = `Tu es l'assistant d'un entrepreneur du BTP.
 Le chantier de ${chantier.client_nom} (${chantier.montant_devis}€) vient de se terminer.
 
 Génère un message SMS chaleureux et professionnel pour demander un avis Google.
@@ -39,7 +39,7 @@ Le message doit :
 - Remercier le client pour sa confiance
 - Mentionner que le chantier est terminé
 - Demander un avis Google de façon naturelle (pas insistant)
-- Inclure le lien : https://g.page/r/patrick-maconnerie/review
+- Inclure le lien : [VOTRE_LIEN_GOOGLE_REVIEW]
 - Être court (2-3 phrases max pour un SMS)
 - Être authentique et personnel
 
@@ -112,7 +112,7 @@ async function avisGoogleAgent() {
 <b>📱 Message SMS à envoyer :</b>
 <i>${messageSMS}</i>
 
-🔗 Lien Google : https://g.page/r/patrick-maconnerie/review
+🔗 Lien Google : [VOTRE_LIEN_GOOGLE_REVIEW]
 
 ────────────────────`
 

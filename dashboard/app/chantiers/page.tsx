@@ -224,13 +224,13 @@ export default function ChantiersPage() {
   const getStatusBadgeClasses = (status: string): string => {
     switch (status) {
       case 'prevu':
-        return 'px-2.5 py-1 rounded-md text-xs font-medium bg-blue-100 text-blue-700'
+        return 'badge-prevu'
       case 'en_cours':
-        return 'px-2.5 py-1 rounded-md text-xs font-medium bg-green-100 text-green-700'
+        return 'badge-encours'
       case 'termine':
-        return 'px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-700'
+        return 'badge-termine'
       default:
-        return 'px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-600'
+        return 'badge-prevu'
     }
   }
 
@@ -258,13 +258,13 @@ export default function ChantiersPage() {
 
   if (loading && chantiers.length === 0) {
     return (
-      <div className="min-h-screen bg-white flex">
+      <div className="min-h-screen bg-background flex">
         <Sidebar />
-        <main className="flex-1 ml-[220px]">
+        <main className="flex-1 ml-[240px]">
           <div className="flex items-center justify-center h-screen">
             <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2563eb] mx-auto mb-4"></div>
-              <p className="text-[#6b7280] text-sm">Chargement...</p>
+              <div className="spinner mx-auto mb-4"></div>
+              <p className="text-gray-600 text-sm">Chargement...</p>
             </div>
           </div>
         </main>
@@ -274,16 +274,16 @@ export default function ChantiersPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-white flex">
+      <div className="min-h-screen bg-background flex">
         <Sidebar />
-        <main className="flex-1 ml-[220px]">
-          <div className="flex items-center justify-center h-screen">
-            <div className="max-w-md bg-white border border-[#e5e7eb] rounded-lg p-8">
-              <h3 className="text-red-600 font-semibold text-lg mb-3">Erreur de connexion</h3>
-              <p className="text-[#6b7280] text-sm">{error}</p>
+        <main className="flex-1 ml-[240px]">
+          <div className="flex items-center justify-center h-screen p-4">
+            <div className="max-w-md card-btp p-8">
+              <h3 className="text-red-600 font-semibold text-lg mb-3 font-primary">Erreur de connexion</h3>
+              <p className="text-gray-600 text-sm">{error}</p>
               <button
                 onClick={fetchChantiers}
-                className="mt-6 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-all duration-150 ease-in-out"
+                className="mt-6 btn-primary w-full"
               >
                 Réessayer
               </button>
@@ -295,15 +295,15 @@ export default function ChantiersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-background flex">
       <Sidebar />
 
-      <main className="flex-1 ml-[220px]">
+      <main className="flex-1 ml-[240px]">
         {/* Toast Notification */}
         {toast && (
           <div className="fixed top-4 right-4 z-50 animate-slide-in">
             <div
-              className={`px-6 py-4 rounded-lg shadow-lg flex items-center gap-3 ${
+              className={`px-6 py-4 rounded-lg shadow-lg flex items-center gap-3 font-primary ${
                 toast.type === 'success' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'
               }`}
             >
@@ -330,18 +330,18 @@ export default function ChantiersPage() {
         )}
 
         {/* Header */}
-        <div className="border-b border-[#f3f4f6] bg-white px-8 py-8">
+        <div className="border-b border-border bg-surface px-8 py-8 slide-in-left">
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-[#111827] mb-2">Chantiers</h1>
-              <p className="text-[#6b7280] text-base">Gestion des chantiers</p>
+              <h1 className="text-4xl font-bold text-secondary font-primary tracking-tight mb-2">Chantiers</h1>
+              <p className="text-base text-gray-600">Gestion des chantiers</p>
             </div>
             <button
               onClick={fetchChantiers}
-              className="group px-4 py-2 text-sm font-medium text-[#6b7280] hover:text-[#111827] border border-[#e5e7eb] rounded-lg hover:border-[#111827] transition-all duration-150 ease-in-out flex items-center gap-2"
+              className="btn-secondary group flex items-center gap-2"
             >
               <svg
-                className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500 ease-in-out"
+                className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -361,35 +361,50 @@ export default function ChantiersPage() {
         <div className="px-8 py-8">
           {/* Stats Row */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white border border-[#e5e7eb] rounded-lg p-6">
-              <div className="text-xs font-semibold text-[#6b7280] uppercase tracking-wide mb-2">
-                Total Chantiers
+            <div className="stat-card fade-in" style={{ animationDelay: '0.1s' }}>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="indicator-dot"></div>
+                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+                  Total Chantiers
+                </div>
               </div>
-              <div className="text-3xl font-bold text-[#111827]">{chantiers.length}</div>
+              <div className="stat-number mb-2">{chantiers.length}</div>
             </div>
-            <div className="bg-white border border-[#e5e7eb] rounded-lg p-6">
-              <div className="text-xs font-semibold text-[#6b7280] uppercase tracking-wide mb-2">
-                Prévus
+            <div className="stat-card fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="indicator-dot"></div>
+                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+                  Prévus
+                </div>
               </div>
-              <div className="text-3xl font-bold text-blue-600">
+              <div className="stat-number mb-2">
                 {chantiers.filter((c) => c.statut === 'prevu').length}
               </div>
+              <div className="text-sm text-gray-500">À venir</div>
             </div>
-            <div className="bg-white border border-[#e5e7eb] rounded-lg p-6">
-              <div className="text-xs font-semibold text-[#6b7280] uppercase tracking-wide mb-2">
-                En Cours
+            <div className="stat-card fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="indicator-dot"></div>
+                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+                  En Cours
+                </div>
               </div>
-              <div className="text-3xl font-bold text-green-600">
+              <div className="stat-number mb-2">
                 {chantiers.filter((c) => c.statut === 'en_cours').length}
               </div>
+              <div className="text-sm text-gray-500">Actifs</div>
             </div>
-            <div className="bg-white border border-[#e5e7eb] rounded-lg p-6">
-              <div className="text-xs font-semibold text-[#6b7280] uppercase tracking-wide mb-2">
-                Terminés
+            <div className="stat-card fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="indicator-dot"></div>
+                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+                  Terminés
+                </div>
               </div>
-              <div className="text-3xl font-bold text-gray-600">
+              <div className="stat-number mb-2">
                 {chantiers.filter((c) => c.statut === 'termine').length}
               </div>
+              <div className="text-sm text-gray-500">Complétés</div>
             </div>
           </div>
 
@@ -397,40 +412,32 @@ export default function ChantiersPage() {
           <div className="mb-6 flex gap-2">
             <button
               onClick={() => setFilterStatus('all')}
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 ${
-                filterStatus === 'all'
-                  ? 'bg-[#2563eb] text-white'
-                  : 'bg-white text-[#6b7280] border border-[#e5e7eb] hover:border-[#2563eb]'
+              className={`filter-btn ${
+                filterStatus === 'all' ? 'filter-btn-active' : ''
               }`}
             >
               Tous ({chantiers.length})
             </button>
             <button
               onClick={() => setFilterStatus('prevu')}
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 ${
-                filterStatus === 'prevu'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-[#6b7280] border border-[#e5e7eb] hover:border-blue-600'
+              className={`filter-btn ${
+                filterStatus === 'prevu' ? 'filter-btn-active' : ''
               }`}
             >
               Prévus ({chantiers.filter((c) => c.statut === 'prevu').length})
             </button>
             <button
               onClick={() => setFilterStatus('en_cours')}
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 ${
-                filterStatus === 'en_cours'
-                  ? 'bg-green-600 text-white'
-                  : 'bg-white text-[#6b7280] border border-[#e5e7eb] hover:border-green-600'
+              className={`filter-btn ${
+                filterStatus === 'en_cours' ? 'filter-btn-active' : ''
               }`}
             >
               En cours ({chantiers.filter((c) => c.statut === 'en_cours').length})
             </button>
             <button
               onClick={() => setFilterStatus('termine')}
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 ${
-                filterStatus === 'termine'
-                  ? 'bg-gray-600 text-white'
-                  : 'bg-white text-[#6b7280] border border-[#e5e7eb] hover:border-gray-600'
+              className={`filter-btn ${
+                filterStatus === 'termine' ? 'filter-btn-active' : ''
               }`}
             >
               Terminés ({chantiers.filter((c) => c.statut === 'termine').length})
@@ -438,12 +445,12 @@ export default function ChantiersPage() {
           </div>
 
           {/* Daily Cost Input Form */}
-          <div className="mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-6">
+          <div className="mb-8 card-btp" style={{ background: 'linear-gradient(to bottom right, #FFF7ED, #FFEDD5)' }}>
             <div className="flex items-center gap-3 mb-4">
-              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
-              <h2 className="text-lg font-semibold text-gray-900">Saisie quotidienne</h2>
+              <h2 className="text-lg font-bold text-secondary font-primary">Saisie quotidienne</h2>
               <span className="text-sm text-gray-600">
                 ({chantiers.filter((c) => c.statut === 'en_cours').length} chantier
                 {chantiers.filter((c) => c.statut === 'en_cours').length > 1 ? 's' : ''} en cours)
@@ -457,13 +464,13 @@ export default function ChantiersPage() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                   {/* Chantier Selection */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    <label className="block text-sm font-medium text-gray-600 mb-1.5">
                       Chantier <span className="text-red-500">*</span>
                     </label>
                     <select
                       value={dailyForm.chantierId}
                       onChange={(e) => setDailyForm({ ...dailyForm, chantierId: e.target.value })}
-                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white"
                     >
                       <option value="">Sélectionner...</option>
                       {chantiers
@@ -478,7 +485,7 @@ export default function ChantiersPage() {
 
                   {/* Heures */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    <label className="block text-sm font-medium text-gray-600 mb-1.5">
                       Heures aujourd'hui
                     </label>
                     <input
@@ -488,13 +495,13 @@ export default function ChantiersPage() {
                       value={dailyForm.heures}
                       onChange={(e) => setDailyForm({ ...dailyForm, heures: e.target.value })}
                       placeholder="0"
-                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>
 
                   {/* Depenses */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    <label className="block text-sm font-medium text-gray-600 mb-1.5">
                       Dépenses aujourd'hui (€)
                     </label>
                     <input
@@ -504,13 +511,13 @@ export default function ChantiersPage() {
                       value={dailyForm.depenses}
                       onChange={(e) => setDailyForm({ ...dailyForm, depenses: e.target.value })}
                       placeholder="0.00"
-                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>
 
                   {/* Note */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    <label className="block text-sm font-medium text-gray-600 mb-1.5">
                       Note (optionnelle)
                     </label>
                     <input
@@ -518,7 +525,7 @@ export default function ChantiersPage() {
                       value={dailyForm.note}
                       onChange={(e) => setDailyForm({ ...dailyForm, note: e.target.value })}
                       placeholder="Ex: Matériaux achetés..."
-                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>
                 </div>
@@ -541,32 +548,32 @@ export default function ChantiersPage() {
                   )
 
                   return (
-                    <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200 mb-4">
+                    <div className="flex items-center justify-between p-4 bg-surface rounded-lg border border-border mb-4">
                       <div className="flex items-center gap-6 text-sm">
                         <div>
                           <span className="text-gray-600">Total heures :</span>
-                          <span className="ml-2 font-semibold text-gray-900">
+                          <span className="ml-2 font-semibold text-secondary">
                             {newHeures.toFixed(1)}h
                             {heuresAjouter > 0 && (
-                              <span className="ml-1 text-blue-600">
+                              <span className="ml-1 text-primary font-bold">
                                 (+{heuresAjouter.toFixed(1)}h)
                               </span>
                             )}
                           </span>
                         </div>
-                        <div className="w-px h-6 bg-gray-300"></div>
+                        <div className="w-px h-6 bg-border"></div>
                         <div>
                           <span className="text-gray-600">Total dépenses :</span>
-                          <span className="ml-2 font-semibold text-gray-900">
+                          <span className="ml-2 font-semibold text-secondary">
                             {newDepenses.toLocaleString('fr-FR')}€
                             {depensesAjouter > 0 && (
-                              <span className="ml-1 text-blue-600">
+                              <span className="ml-1 text-primary font-bold">
                                 (+{depensesAjouter.toLocaleString('fr-FR')}€)
                               </span>
                             )}
                           </span>
                         </div>
-                        <div className="w-px h-6 bg-gray-300"></div>
+                        <div className="w-px h-6 bg-border"></div>
                         <div>
                           <span className="text-gray-600">Marge actuelle :</span>
                           <span
@@ -585,7 +592,7 @@ export default function ChantiersPage() {
                   <button
                     onClick={addDailyCosts}
                     disabled={!dailyForm.chantierId}
-                    className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium text-sm rounded-lg transition-all duration-150 flex items-center gap-2"
+                    className="btn-primary disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-2"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -598,41 +605,23 @@ export default function ChantiersPage() {
           </div>
 
           {/* Table */}
-          <div className="bg-white border border-[#e5e7eb] rounded-lg overflow-hidden">
+          <div className="card-btp overflow-hidden scale-in">
             <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-[#f9fafb] border-b border-[#e5e7eb]">
+              <table className="table-btp">
+                <thead>
                   <tr>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Client
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Téléphone
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Montant
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Heures
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Dépenses
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Marge
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Délai
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Statut
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Actions
-                    </th>
+                    <th>Client</th>
+                    <th>Téléphone</th>
+                    <th>Montant</th>
+                    <th>Heures</th>
+                    <th>Dépenses</th>
+                    <th>Marge</th>
+                    <th>Délai</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#f3f4f6]">
+                <tbody>
                   {filteredChantiers.map((chantier) => {
                     const daysUntilStart = calculateDaysUntilStart(chantier.date_debut)
                     const { marge, margePct } = calculateMargin(
@@ -643,23 +632,23 @@ export default function ChantiersPage() {
                     const isEditing = editingId === chantier.id
 
                     return (
-                      <tr key={chantier.id} className="hover:bg-[#f9fafb] transition-colors">
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-[#111827]">
+                      <tr key={chantier.id}>
+                        <td className="whitespace-nowrap">
+                          <div className="text-sm font-semibold text-secondary">
                             {chantier.client_nom}
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-[#6b7280]">
+                        <td className="whitespace-nowrap">
+                          <div className="text-sm text-gray-500">
                             {chantier.telephone || '-'}
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-semibold text-[#111827]">
+                        <td className="whitespace-nowrap">
+                          <div className="text-sm font-semibold text-secondary tnum">
                             {Number(chantier.montant_devis).toLocaleString('fr-FR')}€
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="whitespace-nowrap">
                           {isEditing ? (
                             <input
                               type="number"
@@ -667,16 +656,16 @@ export default function ChantiersPage() {
                               onChange={(e) =>
                                 setEditValues({ ...editValues, heures: e.target.value })
                               }
-                              className="w-20 px-2 py-1 text-sm border border-[#e5e7eb] rounded focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
+                              className="w-20 px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                               placeholder="0"
                             />
                           ) : (
-                            <div className="text-sm text-[#6b7280]">
+                            <div className="text-sm text-gray-500">
                               {chantier.heures_travaillees || 0}h
                             </div>
                           )}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="whitespace-nowrap">
                           {isEditing ? (
                             <input
                               type="number"
@@ -684,47 +673,47 @@ export default function ChantiersPage() {
                               onChange={(e) =>
                                 setEditValues({ ...editValues, depenses: e.target.value })
                               }
-                              className="w-24 px-2 py-1 text-sm border border-[#e5e7eb] rounded focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
+                              className="w-24 px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                               placeholder="0"
                             />
                           ) : (
-                            <div className="text-sm text-[#6b7280]">
+                            <div className="text-sm text-gray-500">
                               {Number(chantier.depenses || 0).toLocaleString('fr-FR')}€
                             </div>
                           )}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="whitespace-nowrap">
                           <div
                             className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold ${getMarginColor(margePct)}`}
                           >
                             {marge.toLocaleString('fr-FR')}€ ({margePct.toFixed(1)}%)
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-[#6b7280]">
+                        <td className="whitespace-nowrap">
+                          <div className="text-sm text-gray-500">
                             {daysUntilStart > 0 && `Dans ${daysUntilStart} jours`}
                             {daysUntilStart === 0 && "Aujourd'hui"}
                             {daysUntilStart < 0 && `Il y a ${Math.abs(daysUntilStart)} jours`}
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="whitespace-nowrap">
                           <span className={getStatusBadgeClasses(chantier.statut)}>
                             {getStatusLabel(chantier.statut)}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="whitespace-nowrap">
                           <div className="flex gap-2">
                             {isEditing ? (
                               <>
                                 <button
                                   onClick={() => saveEditing(chantier.id)}
-                                  className="px-3 py-1.5 text-xs font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg transition-colors"
+                                  className="px-3 py-1.5 text-xs font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg transition-colors font-primary"
                                 >
                                   Enregistrer
                                 </button>
                                 <button
                                   onClick={cancelEditing}
-                                  className="px-3 py-1.5 text-xs font-medium text-[#6b7280] bg-white border border-[#e5e7eb] hover:border-[#111827] rounded-lg transition-all"
+                                  className="btn-secondary text-xs"
                                 >
                                   Annuler
                                 </button>
@@ -733,7 +722,7 @@ export default function ChantiersPage() {
                               <>
                                 <button
                                   onClick={() => startEditing(chantier)}
-                                  className="px-3 py-1.5 text-xs font-medium text-[#2563eb] bg-[#eff6ff] hover:bg-[#dbeafe] rounded-lg transition-colors"
+                                  className="px-3 py-1.5 text-xs font-medium text-primary bg-[#FFF7ED] hover:bg-[#FFEDD5] rounded-lg transition-colors font-primary"
                                 >
                                   Modifier coûts
                                 </button>
@@ -742,7 +731,7 @@ export default function ChantiersPage() {
                                   onChange={(e) =>
                                     updateChantierStatus(chantier.id, e.target.value)
                                   }
-                                  className="px-3 py-1.5 text-xs font-medium text-[#111827] bg-white border border-[#e5e7eb] hover:border-[#2563eb] rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
+                                  className="px-3 py-1.5 text-xs font-medium text-secondary bg-white border border-border hover:border-primary rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary"
                                 >
                                   <option value="prevu">Prévu</option>
                                   <option value="en_cours">En cours</option>
@@ -760,7 +749,7 @@ export default function ChantiersPage() {
 
               {filteredChantiers.length === 0 && (
                 <div className="px-6 py-12 text-center">
-                  <p className="text-[#6b7280] text-sm">
+                  <p className="text-gray-500 text-sm">
                     Aucun chantier à afficher pour ce filtre
                   </p>
                 </div>

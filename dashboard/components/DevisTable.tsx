@@ -7,9 +7,9 @@ interface DevisTableProps {
 export default function DevisTable({ devis }: DevisTableProps) {
   const getStatusBadge = (statut: string) => {
     const styles = {
-      en_attente: 'badge badge-amber',
-      accepte: 'badge badge-emerald',
-      refuse: 'badge bg-[var(--color-error)] bg-opacity-10 text-[var(--color-error)]',
+      en_attente: 'badge-attente',
+      accepte: 'badge-accepte',
+      refuse: 'badge-refuse',
     }
     return styles[statut as keyof typeof styles] || styles.en_attente
   }
@@ -33,25 +33,22 @@ export default function DevisTable({ devis }: DevisTableProps) {
 
   const getDaysColor = (days: number) => {
     if (days > 3) return 'text-red-600 font-semibold'
-    if (days >= 2) return 'text-amber-600 font-medium'
+    if (days >= 2) return 'text-primary font-medium'
     return 'text-green-600'
   }
 
   return (
-    <div className="card-premium overflow-hidden scale-in">
-      <div className="px-6 py-5 border-b" style={{ borderColor: 'var(--color-border-subtle)' }}>
+    <div className="card-btp overflow-hidden scale-in">
+      <div className="px-6 py-5 border-b border-border">
         <div className="flex items-center gap-2">
-          <div className="accent-dot" style={{ backgroundColor: 'var(--color-accent-amber)' }}></div>
-          <h2 className="text-xl font-bold" style={{
-            fontFamily: 'var(--font-display)',
-            color: 'var(--color-text-primary)'
-          }}>
+          <div className="indicator-dot"></div>
+          <h2 className="text-xl font-bold text-secondary font-primary">
             Devis en attente
           </h2>
         </div>
       </div>
       <div className="overflow-x-auto">
-        <table className="table-premium">
+        <table className="table-btp">
           <thead>
             <tr>
               <th>Client</th>
@@ -64,7 +61,7 @@ export default function DevisTable({ devis }: DevisTableProps) {
           <tbody>
             {devis.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-6 py-12 text-center text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
+                <td colSpan={5} className="px-6 py-12 text-center text-sm text-gray-500">
                   Aucun devis en attente
                 </td>
               </tr>
@@ -75,21 +72,20 @@ export default function DevisTable({ devis }: DevisTableProps) {
                 return (
                   <tr
                     key={d.id}
-                    className={isUrgent ? 'border-l-[3px]' : ''}
-                    style={isUrgent ? { borderLeftColor: 'var(--color-error)' } : {}}
+                    className={isUrgent ? 'urgent' : ''}
                   >
                     <td className="whitespace-nowrap">
-                      <div className="text-sm font-semibold" style={{ color: 'var(--color-text-primary)' }}>
+                      <div className="text-sm font-semibold text-secondary">
                         {d.client_nom}
                       </div>
                       {d.telephone && (
-                        <div className="text-xs mt-1" style={{ color: 'var(--color-text-tertiary)' }}>
+                        <div className="text-xs mt-1 text-gray-500">
                           {d.telephone}
                         </div>
                       )}
                     </td>
                     <td className="whitespace-nowrap">
-                      <div className="text-sm font-semibold tnum" style={{ color: 'var(--color-text-primary)' }}>
+                      <div className="text-sm font-semibold tnum text-secondary">
                         {Number(d.montant).toLocaleString('fr-FR')}€
                       </div>
                     </td>
@@ -98,7 +94,7 @@ export default function DevisTable({ devis }: DevisTableProps) {
                         {daysWaiting} jour{daysWaiting > 1 ? 's' : ''}
                       </div>
                     </td>
-                    <td className="whitespace-nowrap text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
+                    <td className="whitespace-nowrap text-sm text-gray-500">
                       {new Date(d.date_envoi).toLocaleDateString('fr-FR')}
                     </td>
                     <td className="whitespace-nowrap">

@@ -1,7 +1,7 @@
 {
-  "name": "patrick-maconnerie-agents",
+  "name": "agent-btp-template",
   "version": "1.0.0",
-  "description": "Système d'agents IA pour Patrick Maçonnerie",
+  "description": "Système d'agents IA pour le secteur BTP",
   "type": "module",
   "main": "cron.js",
   "scripts": {

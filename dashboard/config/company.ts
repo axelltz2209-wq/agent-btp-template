@@ -5,13 +5,13 @@
 
 export const companyConfig = {
   // Nom de l'entreprise
-  name: "Patrick Maçonnerie",
+  name: "Agent BTP Template",
 
   // Nom du propriétaire/gérant
-  owner: "Patrick",
+  owner: "Votre Nom",
 
   // Avatar (initiales)
-  avatar: "PM",
+  avatar: "BTP",
 
   // Couleur principale (hex)
   color: "#2563eb",

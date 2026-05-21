@@ -109,13 +109,13 @@ export default function DevisPage() {
   const getStatusBadgeClasses = (status: string): string => {
     switch (status) {
       case 'en_attente':
-        return 'px-2.5 py-1 rounded-md text-xs font-medium bg-yellow-100 text-yellow-700'
+        return 'badge-attente'
       case 'accepte':
-        return 'px-2.5 py-1 rounded-md text-xs font-medium bg-green-100 text-green-700'
+        return 'badge-accepte'
       case 'refuse':
-        return 'px-2.5 py-1 rounded-md text-xs font-medium bg-red-100 text-red-700'
+        return 'badge-refuse'
       default:
-        return 'px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-600'
+        return 'badge-attente'
     }
   }
 
@@ -141,13 +141,13 @@ export default function DevisPage() {
 
   if (loading && devis.length === 0) {
     return (
-      <div className="min-h-screen bg-white flex">
+      <div className="min-h-screen bg-background flex">
         <Sidebar />
-        <main className="flex-1 ml-[220px]">
+        <main className="flex-1 ml-[240px]">
           <div className="flex items-center justify-center h-screen">
             <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2563eb] mx-auto mb-4"></div>
-              <p className="text-[#6b7280] text-sm">Chargement...</p>
+              <div className="spinner mx-auto mb-4"></div>
+              <p className="text-gray-600 text-sm">Chargement...</p>
             </div>
           </div>
         </main>
@@ -157,16 +157,16 @@ export default function DevisPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-white flex">
+      <div className="min-h-screen bg-background flex">
         <Sidebar />
-        <main className="flex-1 ml-[220px]">
-          <div className="flex items-center justify-center h-screen">
-            <div className="max-w-md bg-white border border-[#e5e7eb] rounded-lg p-8">
-              <h3 className="text-red-600 font-semibold text-lg mb-3">Erreur de connexion</h3>
-              <p className="text-[#6b7280] text-sm">{error}</p>
+        <main className="flex-1 ml-[240px]">
+          <div className="flex items-center justify-center h-screen p-4">
+            <div className="max-w-md card-btp p-8">
+              <h3 className="text-red-600 font-semibold text-lg mb-3 font-primary">Erreur de connexion</h3>
+              <p className="text-gray-600 text-sm">{error}</p>
               <button
                 onClick={fetchDevis}
-                className="mt-6 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-all duration-150 ease-in-out"
+                className="mt-6 btn-primary w-full"
               >
                 Réessayer
               </button>
@@ -178,15 +178,15 @@ export default function DevisPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-background flex">
       <Sidebar />
 
-      <main className="flex-1 ml-[220px]">
+      <main className="flex-1 ml-[240px]">
         {/* Toast Notification */}
         {toast && (
           <div className="fixed top-4 right-4 z-50 animate-slide-in">
             <div
-              className={`px-6 py-4 rounded-lg shadow-lg flex items-center gap-3 ${
+              className={`px-6 py-4 rounded-lg shadow-lg flex items-center gap-3 font-primary ${
                 toast.type === 'success'
                   ? 'bg-green-600 text-white'
                   : 'bg-red-600 text-white'
@@ -215,18 +215,18 @@ export default function DevisPage() {
         )}
 
         {/* Header */}
-        <div className="border-b border-[#f3f4f6] bg-white px-8 py-8">
+        <div className="border-b border-border bg-surface px-8 py-8 slide-in-left">
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-[#111827] mb-2">Devis</h1>
-              <p className="text-[#6b7280] text-base">Gestion des devis clients</p>
+              <h1 className="text-4xl font-bold text-secondary font-primary tracking-tight mb-2">Devis</h1>
+              <p className="text-base text-gray-600">Gestion des devis clients</p>
             </div>
             <button
               onClick={fetchDevis}
-              className="group px-4 py-2 text-sm font-medium text-[#6b7280] hover:text-[#111827] border border-[#e5e7eb] rounded-lg hover:border-[#111827] transition-all duration-150 ease-in-out flex items-center gap-2"
+              className="btn-secondary group flex items-center gap-2"
             >
               <svg
-                className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500 ease-in-out"
+                className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -246,35 +246,50 @@ export default function DevisPage() {
         <div className="px-8 py-8">
           {/* Stats Row */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white border border-[#e5e7eb] rounded-lg p-6">
-              <div className="text-xs font-semibold text-[#6b7280] uppercase tracking-wide mb-2">
-                Total Devis
+            <div className="stat-card fade-in" style={{ animationDelay: '0.1s' }}>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="indicator-dot"></div>
+                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+                  Total Devis
+                </div>
               </div>
-              <div className="text-3xl font-bold text-[#111827]">{devis.length}</div>
+              <div className="stat-number mb-2">{devis.length}</div>
             </div>
-            <div className="bg-white border border-[#e5e7eb] rounded-lg p-6">
-              <div className="text-xs font-semibold text-[#6b7280] uppercase tracking-wide mb-2">
-                En Attente
+            <div className="stat-card fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="indicator-dot"></div>
+                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+                  En Attente
+                </div>
               </div>
-              <div className="text-3xl font-bold text-yellow-600">
+              <div className="stat-number mb-2">
                 {devis.filter((d) => d.statut === 'en_attente').length}
               </div>
+              <div className="text-sm text-gray-500">Action requise</div>
             </div>
-            <div className="bg-white border border-[#e5e7eb] rounded-lg p-6">
-              <div className="text-xs font-semibold text-[#6b7280] uppercase tracking-wide mb-2">
-                Acceptés
+            <div className="stat-card fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="indicator-dot"></div>
+                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+                  Acceptés
+                </div>
               </div>
-              <div className="text-3xl font-bold text-green-600">
+              <div className="stat-number mb-2">
                 {devis.filter((d) => d.statut === 'accepte').length}
               </div>
+              <div className="text-sm text-gray-500">Validés</div>
             </div>
-            <div className="bg-white border border-[#e5e7eb] rounded-lg p-6">
-              <div className="text-xs font-semibold text-[#6b7280] uppercase tracking-wide mb-2">
-                Refusés
+            <div className="stat-card fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="indicator-dot"></div>
+                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+                  Refusés
+                </div>
               </div>
-              <div className="text-3xl font-bold text-red-600">
+              <div className="stat-number mb-2">
                 {devis.filter((d) => d.statut === 'refuse').length}
               </div>
+              <div className="text-sm text-gray-500">Non acceptés</div>
             </div>
           </div>
 
@@ -282,40 +297,32 @@ export default function DevisPage() {
           <div className="mb-6 flex gap-2">
             <button
               onClick={() => setFilterStatus('all')}
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 ${
-                filterStatus === 'all'
-                  ? 'bg-[#2563eb] text-white'
-                  : 'bg-white text-[#6b7280] border border-[#e5e7eb] hover:border-[#2563eb]'
+              className={`filter-btn ${
+                filterStatus === 'all' ? 'filter-btn-active' : ''
               }`}
             >
               Tous ({devis.length})
             </button>
             <button
               onClick={() => setFilterStatus('en_attente')}
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 ${
-                filterStatus === 'en_attente'
-                  ? 'bg-yellow-600 text-white'
-                  : 'bg-white text-[#6b7280] border border-[#e5e7eb] hover:border-yellow-600'
+              className={`filter-btn ${
+                filterStatus === 'en_attente' ? 'filter-btn-active' : ''
               }`}
             >
               En attente ({devis.filter((d) => d.statut === 'en_attente').length})
             </button>
             <button
               onClick={() => setFilterStatus('accepte')}
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 ${
-                filterStatus === 'accepte'
-                  ? 'bg-green-600 text-white'
-                  : 'bg-white text-[#6b7280] border border-[#e5e7eb] hover:border-green-600'
+              className={`filter-btn ${
+                filterStatus === 'accepte' ? 'filter-btn-active' : ''
               }`}
             >
               Acceptés ({devis.filter((d) => d.statut === 'accepte').length})
             </button>
             <button
               onClick={() => setFilterStatus('refuse')}
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 ${
-                filterStatus === 'refuse'
-                  ? 'bg-red-600 text-white'
-                  : 'bg-white text-[#6b7280] border border-[#e5e7eb] hover:border-red-600'
+              className={`filter-btn ${
+                filterStatus === 'refuse' ? 'filter-btn-active' : ''
               }`}
             >
               Refusés ({devis.filter((d) => d.statut === 'refuse').length})
@@ -323,107 +330,99 @@ export default function DevisPage() {
           </div>
 
           {/* Table */}
-          <div className="bg-white border border-[#e5e7eb] rounded-lg overflow-hidden">
+          <div className="card-btp overflow-hidden scale-in">
             <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-[#f9fafb] border-b border-[#e5e7eb]">
+              <table className="table-btp">
+                <thead>
                   <tr>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Client
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Téléphone
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Montant
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Date d'envoi
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Jours d'attente
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Statut
-                    </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-[#6b7280] uppercase tracking-wider">
-                      Actions
-                    </th>
+                    <th>Client</th>
+                    <th>Téléphone</th>
+                    <th>Montant</th>
+                    <th>Date d'envoi</th>
+                    <th>Jours d'attente</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#f3f4f6]">
-                  {filteredDevis.map((devisItem) => (
-                    <tr key={devisItem.id} className="hover:bg-[#f9fafb] transition-colors">
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-[#111827]">
-                          {devisItem.client_nom}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-[#6b7280]">
-                          {devisItem.telephone || '-'}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-semibold text-[#111827]">
-                          {Number(devisItem.montant).toLocaleString('fr-FR')}€
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-[#6b7280]">
-                          {new Date(devisItem.date_envoi).toLocaleDateString('fr-FR')}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-[#6b7280]">
-                          {calculateDaysWaiting(devisItem.date_envoi)} jours
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={getStatusBadgeClasses(devisItem.statut)}>
-                          {getStatusLabel(devisItem.statut)}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {devisItem.statut === 'en_attente' && (
-                          <div className="flex gap-2">
-                            <button
-                              onClick={() =>
-                                updateDevisStatus(devisItem.id, 'accepte', devisItem.client_nom)
-                              }
-                              className="px-3 py-1.5 text-xs font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg transition-colors"
-                            >
-                              Accepter
-                            </button>
-                            <button
-                              onClick={() =>
-                                updateDevisStatus(devisItem.id, 'refuse', devisItem.client_nom)
-                              }
-                              className="px-3 py-1.5 text-xs font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors"
-                            >
-                              Refuser
-                            </button>
+                <tbody>
+                  {filteredDevis.map((devisItem) => {
+                    const daysWaiting = calculateDaysWaiting(devisItem.date_envoi)
+                    const isUrgent = daysWaiting > 5
+                    return (
+                      <tr key={devisItem.id} className={isUrgent ? 'urgent' : ''}>
+                        <td className="whitespace-nowrap">
+                          <div className="text-sm font-semibold text-secondary">
+                            {devisItem.client_nom}
                           </div>
-                        )}
-                        {devisItem.statut !== 'en_attente' && (
-                          <button
-                            onClick={() =>
-                              updateDevisStatus(devisItem.id, 'en_attente', devisItem.client_nom)
-                            }
-                            className="px-3 py-1.5 text-xs font-medium text-[#6b7280] bg-white border border-[#e5e7eb] hover:border-[#111827] rounded-lg transition-all"
-                          >
-                            Réinitialiser
-                          </button>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                        </td>
+                        <td className="whitespace-nowrap">
+                          <div className="text-sm text-gray-500">
+                            {devisItem.telephone || '-'}
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap">
+                          <div className="text-sm font-semibold tnum text-secondary">
+                            {Number(devisItem.montant).toLocaleString('fr-FR')}€
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap text-sm text-gray-500">
+                          {new Date(devisItem.date_envoi).toLocaleDateString('fr-FR')}
+                        </td>
+                        <td className="whitespace-nowrap">
+                          <div className={`text-sm ${
+                            daysWaiting > 3 ? 'text-red-600 font-semibold' :
+                            daysWaiting >= 2 ? 'text-primary font-medium' :
+                            'text-green-600'
+                          }`}>
+                            {daysWaiting} jour{daysWaiting > 1 ? 's' : ''}
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap">
+                          <span className={getStatusBadgeClasses(devisItem.statut)}>
+                            {getStatusLabel(devisItem.statut)}
+                          </span>
+                        </td>
+                        <td className="whitespace-nowrap">
+                          {devisItem.statut === 'en_attente' && (
+                            <div className="flex gap-2">
+                              <button
+                                onClick={() =>
+                                  updateDevisStatus(devisItem.id, 'accepte', devisItem.client_nom)
+                                }
+                                className="px-3 py-1.5 text-xs font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg transition-colors font-primary"
+                              >
+                                Accepter
+                              </button>
+                              <button
+                                onClick={() =>
+                                  updateDevisStatus(devisItem.id, 'refuse', devisItem.client_nom)
+                                }
+                                className="px-3 py-1.5 text-xs font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors font-primary"
+                              >
+                                Refuser
+                              </button>
+                            </div>
+                          )}
+                          {devisItem.statut !== 'en_attente' && (
+                            <button
+                              onClick={() =>
+                                updateDevisStatus(devisItem.id, 'en_attente', devisItem.client_nom)
+                              }
+                              className="btn-secondary text-xs"
+                            >
+                              Réinitialiser
+                            </button>
+                          )}
+                        </td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </table>
 
               {filteredDevis.length === 0 && (
                 <div className="px-6 py-12 text-center">
-                  <p className="text-[#6b7280] text-sm">
+                  <p className="text-gray-500 text-sm">
                     Aucun devis à afficher pour ce filtre
                   </p>
                 </div>

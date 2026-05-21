@@ -184,13 +184,13 @@ export default function AgentsPage() {
 
   if (loading && logs.length === 0) {
     return (
-      <div className="min-h-screen bg-white flex">
+      <div className="min-h-screen bg-background flex">
         <Sidebar />
-        <main className="flex-1 ml-[220px]">
+        <main className="flex-1 ml-[240px]">
           <div className="flex items-center justify-center h-screen">
             <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2563eb] mx-auto mb-4"></div>
-              <p className="text-[#6b7280] text-sm">Chargement...</p>
+              <div className="spinner mx-auto mb-4"></div>
+              <p className="text-gray-600 text-sm">Chargement...</p>
             </div>
           </div>
         </main>
@@ -200,16 +200,16 @@ export default function AgentsPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-white flex">
+      <div className="min-h-screen bg-background flex">
         <Sidebar />
-        <main className="flex-1 ml-[220px]">
-          <div className="flex items-center justify-center h-screen">
-            <div className="max-w-md bg-white border border-[#e5e7eb] rounded-lg p-8">
-              <h3 className="text-red-600 font-semibold text-lg mb-3">Erreur de connexion</h3>
-              <p className="text-[#6b7280] text-sm">{error}</p>
+        <main className="flex-1 ml-[240px]">
+          <div className="flex items-center justify-center h-screen p-4">
+            <div className="max-w-md card-btp p-8">
+              <h3 className="text-red-600 font-semibold text-lg mb-3 font-primary">Erreur de connexion</h3>
+              <p className="text-gray-600 text-sm">{error}</p>
               <button
                 onClick={fetchLogs}
-                className="mt-6 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-all duration-150 ease-in-out"
+                className="mt-6 btn-primary w-full"
               >
                 Réessayer
               </button>
@@ -221,23 +221,23 @@ export default function AgentsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-background flex">
       <Sidebar />
 
-      <main className="flex-1 ml-[220px]">
+      <main className="flex-1 ml-[240px]">
         {/* Header */}
-        <div className="border-b border-[#f3f4f6] bg-white px-8 py-8">
+        <div className="border-b border-border bg-surface px-8 py-8 slide-in-left">
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-[#111827] mb-2">Agents IA</h1>
-              <p className="text-[#6b7280] text-base">Surveillance en temps réel des agents autonomes</p>
+              <h1 className="text-4xl font-bold text-secondary font-primary tracking-tight mb-2">Agents IA</h1>
+              <p className="text-base text-gray-600">Surveillance en temps réel des agents autonomes</p>
             </div>
             <button
               onClick={fetchLogs}
-              className="group px-4 py-2 text-sm font-medium text-[#6b7280] hover:text-[#111827] border border-[#e5e7eb] rounded-lg hover:border-[#111827] transition-all duration-150 ease-in-out flex items-center gap-2"
+              className="btn-secondary group flex items-center gap-2"
             >
               <svg
-                className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500 ease-in-out"
+                className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -265,32 +265,32 @@ export default function AgentsPage() {
               return (
                 <div
                   key={agent.name}
-                  className="bg-white border border-[#e5e7eb] rounded-lg p-6 hover:border-[#2563eb] transition-all duration-150 ease-in-out"
+                  className={`card-btp p-6 hover:border-primary transition-all duration-150 ${lastLog ? 'border-t-4 border-t-primary' : ''}`}
                 >
                   {/* Agent Header */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
                       <div className="text-2xl">{agent.emoji}</div>
                       <div>
-                        <h3 className="font-semibold text-[#111827] text-base">{agent.displayName}</h3>
-                        <p className="text-xs text-[#6b7280] mt-0.5">{agent.schedule}</p>
+                        <h3 className="font-bold text-secondary text-base font-primary">{agent.displayName}</h3>
+                        <p className="text-xs text-gray-500 mt-0.5">{agent.schedule}</p>
                       </div>
                     </div>
                     <span
-                      className={`px-2.5 py-1 rounded-md text-xs font-medium ${lastLog ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}
+                      className={`px-2.5 py-1 rounded-md text-xs font-bold font-primary ${lastLog ? 'bg-primary text-white' : 'bg-gray-200 text-gray-600'}`}
                     >
                       {lastLog ? 'ACTIF' : 'EN PAUSE'}
                     </span>
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm text-[#6b7280] mb-4 leading-relaxed">{agent.description}</p>
+                  <p className="text-sm text-gray-600 mb-4 leading-relaxed">{agent.description}</p>
 
                   {/* Stats */}
-                  <div className="space-y-3 pt-4 border-t border-[#f3f4f6]">
+                  <div className="space-y-3 pt-4 border-t border-border">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-[#6b7280]">Dernière exécution</span>
-                      <span className="font-medium text-[#111827] text-xs">
+                      <span className="text-gray-600">Dernière exécution</span>
+                      <span className="font-medium text-secondary text-xs">
                         {lastLog
                           ? new Date(lastLog.created_at).toLocaleString('fr-FR', {
                               day: '2-digit',
@@ -303,22 +303,22 @@ export default function AgentsPage() {
                     </div>
 
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-[#6b7280]">Prochaine exécution</span>
-                      <span className="font-medium text-[#111827] text-xs">{getNextRun(agent.schedule)}</span>
+                      <span className="text-gray-600">Prochaine exécution</span>
+                      <span className="font-medium text-secondary text-xs">{getNextRun(agent.schedule)}</span>
                     </div>
 
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-[#6b7280]">Actions aujourd'hui</span>
-                      <span className="font-bold text-[#2563eb] text-sm">{actionsToday}</span>
+                      <span className="text-gray-600">Actions aujourd'hui</span>
+                      <span className="font-bold text-primary text-sm">{actionsToday}</span>
                     </div>
 
                     {lastLog && (
-                      <div className="pt-3 border-t border-[#f3f4f6]">
+                      <div className="pt-3 border-t border-border">
                         <div className="flex items-start gap-2">
                           <span className={`px-2 py-0.5 rounded text-xs font-medium ${statusColor}`}>
                             {lastLog.status.toUpperCase()}
                           </span>
-                          <p className="text-xs text-[#6b7280] line-clamp-2 flex-1">{lastLog.action}</p>
+                          <p className="text-xs text-gray-600 line-clamp-2 flex-1">{lastLog.action}</p>
                         </div>
                       </div>
                     )}
@@ -329,13 +329,16 @@ export default function AgentsPage() {
           </div>
 
           {/* Recent Activity Feed */}
-          <div className="bg-white border border-[#e5e7eb] rounded-lg">
-            <div className="px-6 py-4 border-b border-[#f3f4f6]">
-              <h2 className="text-lg font-semibold text-[#111827]">Activité récente</h2>
-              <p className="text-sm text-[#6b7280] mt-1">20 dernières actions des agents</p>
+          <div className="card-btp overflow-hidden scale-in">
+            <div className="px-6 py-5 border-b border-border">
+              <div className="flex items-center gap-2">
+                <div className="indicator-dot"></div>
+                <h2 className="text-xl font-bold text-secondary font-primary">Activité récente</h2>
+              </div>
+              <p className="text-sm text-gray-600 mt-2">20 dernières actions des agents</p>
             </div>
 
-            <div className="divide-y divide-[#f3f4f6]">
+            <div className="divide-y divide-border">
               {logs.slice(0, 20).map((log) => {
                 const agent = AGENTS.find((a) => a.name === log.agent_name)
                 const statusColor = getStatusColor(log.status)
@@ -343,21 +346,21 @@ export default function AgentsPage() {
                 return (
                   <div
                     key={log.id}
-                    className="px-6 py-4 hover:bg-[#f9fafb] transition-colors duration-150"
+                    className="px-6 py-4 hover:bg-[#FAFAF9] transition-colors duration-150"
                   >
                     <div className="flex items-start gap-4">
                       <div className="text-xl">{agent?.emoji || '🤖'}</div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="font-medium text-[#111827] text-sm">
+                          <span className="font-semibold text-secondary text-sm">
                             {agent?.displayName || log.agent_name}
                           </span>
                           <span className={`px-2 py-0.5 rounded text-xs font-medium ${statusColor}`}>
                             {log.status}
                           </span>
                         </div>
-                        <p className="text-sm text-[#6b7280] mb-1">{log.action}</p>
-                        <div className="flex items-center gap-3 text-xs text-[#9ca3af]">
+                        <p className="text-sm text-gray-600 mb-1">{log.action}</p>
+                        <div className="flex items-center gap-3 text-xs text-gray-500">
                           <span>
                             {new Date(log.created_at).toLocaleString('fr-FR', {
                               day: '2-digit',
@@ -381,7 +384,7 @@ export default function AgentsPage() {
 
               {logs.length === 0 && (
                 <div className="px-6 py-12 text-center">
-                  <p className="text-[#6b7280] text-sm">Aucune activité enregistrée pour le moment</p>
+                  <p className="text-gray-500 text-sm">Aucune activité enregistrée pour le moment</p>
                 </div>
               )}
             </div>

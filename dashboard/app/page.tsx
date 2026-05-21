@@ -93,10 +93,10 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center fade-in">
           <div className="spinner mx-auto mb-4"></div>
-          <p className="text-sm" style={{ color: 'var(--color-text-tertiary)' }}>Chargement...</p>
+          <p className="text-sm text-gray-600">Chargement...</p>
         </div>
       </div>
     )
@@ -104,12 +104,12 @@ export default function Dashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="card-premium p-8 max-w-md scale-in">
-          <h3 className="text-lg font-semibold mb-3" style={{ color: 'var(--color-error)' }}>
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="card-btp p-8 max-w-md scale-in">
+          <h3 className="text-lg font-semibold mb-3 text-red-600">
             Erreur de connexion
           </h3>
-          <p className="text-sm mb-6" style={{ color: 'var(--color-text-tertiary)' }}>
+          <p className="text-sm mb-6 text-gray-600">
             {error}
           </p>
           <button onClick={fetchData} className="btn-primary w-full">
@@ -121,22 +121,18 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-background flex">
       <Sidebar />
 
       <main className="flex-1 ml-[240px]">
         {/* Header */}
-        <div className="border-b px-8 py-8 bg-[var(--color-surface)] slide-in-left" style={{ borderColor: 'var(--color-border-subtle)' }}>
+        <div className="border-b border-border px-8 py-8 bg-surface slide-in-left">
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-4xl font-bold mb-2" style={{
-                fontFamily: 'var(--font-display)',
-                color: 'var(--color-text-primary)',
-                letterSpacing: 'var(--tracking-tight)'
-              }}>
+              <h1 className="text-4xl font-bold mb-2 text-secondary font-primary tracking-tight">
                 Tableau de bord
               </h1>
-              <p className="text-base" style={{ color: 'var(--color-text-tertiary)' }}>
+              <p className="text-base text-gray-600">
                 {companyConfig.name}
               </p>
             </div>
@@ -159,61 +155,61 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Stats Row - 4 cards */}
+        {/* Stats Row - 4 cards with construction BTP styling */}
         <div className="px-8 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {/* Stat 1: Total Pipeline */}
-            <div className="card-premium p-6 fade-in" style={{ animationDelay: '0.1s' }}>
+            <div className="stat-card fade-in" style={{ animationDelay: '0.1s' }}>
               <div className="flex items-center gap-2 mb-4">
-                <div className="accent-dot" style={{ backgroundColor: 'var(--color-accent-blue)' }}></div>
-                <div className="stat-label">Pipeline Total</div>
+                <div className="indicator-dot"></div>
+                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">Pipeline Total</div>
               </div>
-              <div className="stat-display mb-2">
+              <div className="stat-number mb-2">
                 {totalPipeline.toLocaleString('fr-FR')}€
               </div>
-              <div className="text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
+              <div className="text-sm text-gray-500">
                 {devis.length} devis au total
               </div>
             </div>
 
             {/* Stat 2: Devis en attente */}
-            <div className="card-premium p-6 fade-in" style={{ animationDelay: '0.2s' }}>
+            <div className="stat-card fade-in" style={{ animationDelay: '0.2s' }}>
               <div className="flex items-center gap-2 mb-4">
-                <div className="accent-dot" style={{ backgroundColor: 'var(--color-accent-amber)' }}></div>
-                <div className="stat-label">En Attente</div>
+                <div className="indicator-dot"></div>
+                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">En Attente</div>
               </div>
-              <div className="stat-display mb-2">
+              <div className="stat-number mb-2">
                 {devisEnAttente.length}
               </div>
-              <div className="text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
+              <div className="text-sm text-gray-500">
                 {totalDevisEnAttente.toLocaleString('fr-FR')}€
               </div>
             </div>
 
             {/* Stat 3: Chantiers cette semaine */}
-            <div className="card-premium p-6 fade-in" style={{ animationDelay: '0.3s' }}>
+            <div className="stat-card fade-in" style={{ animationDelay: '0.3s' }}>
               <div className="flex items-center gap-2 mb-4">
-                <div className="accent-dot" style={{ backgroundColor: 'var(--color-accent-purple)' }}></div>
-                <div className="stat-label">Cette Semaine</div>
+                <div className="indicator-dot"></div>
+                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">Cette Semaine</div>
               </div>
-              <div className="stat-display mb-2">
+              <div className="stat-number mb-2">
                 {weekChantiers.length}
               </div>
-              <div className="text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
+              <div className="text-sm text-gray-500">
                 {totalCAWeek.toLocaleString('fr-FR')}€ prévu
               </div>
             </div>
 
             {/* Stat 4: Chantiers en cours */}
-            <div className="card-premium p-6 fade-in" style={{ animationDelay: '0.4s' }}>
+            <div className="stat-card fade-in" style={{ animationDelay: '0.4s' }}>
               <div className="flex items-center gap-2 mb-4">
-                <div className="accent-dot" style={{ backgroundColor: 'var(--color-accent-emerald)' }}></div>
-                <div className="stat-label">En Cours</div>
+                <div className="indicator-dot"></div>
+                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">En Cours</div>
               </div>
-              <div className="stat-display mb-2">
+              <div className="stat-number mb-2">
                 {chantiersEnCours}
               </div>
-              <div className="text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
+              <div className="text-sm text-gray-500">
                 Chantiers actifs
               </div>
             </div>

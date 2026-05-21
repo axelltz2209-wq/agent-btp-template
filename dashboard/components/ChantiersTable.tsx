@@ -7,9 +7,9 @@ interface ChantiersTableProps {
 export default function ChantiersTable({ chantiers }: ChantiersTableProps) {
   const getStatusBadge = (statut: string) => {
     const styles = {
-      prevu: 'badge badge-blue',
-      en_cours: 'badge badge-purple',
-      termine: 'badge badge-emerald',
+      prevu: 'badge-prevu',
+      en_cours: 'badge-encours',
+      termine: 'badge-termine',
     }
     return styles[statut as keyof typeof styles] || styles.prevu
   }
@@ -39,20 +39,17 @@ export default function ChantiersTable({ chantiers }: ChantiersTableProps) {
   }
 
   return (
-    <div className="card-premium overflow-hidden scale-in" style={{ animationDelay: '0.1s' }}>
-      <div className="px-6 py-5 border-b" style={{ borderColor: 'var(--color-border-subtle)' }}>
+    <div className="card-btp overflow-hidden scale-in" style={{ animationDelay: '0.1s' }}>
+      <div className="px-6 py-5 border-b border-border">
         <div className="flex items-center gap-2">
-          <div className="accent-dot" style={{ backgroundColor: 'var(--color-accent-purple)' }}></div>
-          <h2 className="text-xl font-bold" style={{
-            fontFamily: 'var(--font-display)',
-            color: 'var(--color-text-primary)'
-          }}>
+          <div className="indicator-dot"></div>
+          <h2 className="text-xl font-bold text-secondary font-primary">
             Chantiers à venir
           </h2>
         </div>
       </div>
       <div className="overflow-x-auto">
-        <table className="table-premium">
+        <table className="table-btp">
           <thead>
             <tr>
               <th>Client</th>
@@ -65,7 +62,7 @@ export default function ChantiersTable({ chantiers }: ChantiersTableProps) {
           <tbody>
             {chantiers.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-6 py-12 text-center text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
+                <td colSpan={5} className="px-6 py-12 text-center text-sm text-gray-500">
                   Aucun chantier trouvé
                 </td>
               </tr>
@@ -75,20 +72,20 @@ export default function ChantiersTable({ chantiers }: ChantiersTableProps) {
                 return (
                   <tr key={c.id}>
                     <td className="whitespace-nowrap">
-                      <div className="text-sm font-semibold" style={{ color: 'var(--color-text-primary)' }}>
+                      <div className="text-sm font-semibold text-secondary">
                         {c.client_nom}
                       </div>
                     </td>
                     <td className="whitespace-nowrap">
-                      <div className="text-sm font-semibold tnum" style={{ color: 'var(--color-text-primary)' }}>
+                      <div className="text-sm font-semibold tnum text-secondary">
                         {Number(c.montant_devis).toLocaleString('fr-FR')}€
                       </div>
                     </td>
-                    <td className="whitespace-nowrap text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
+                    <td className="whitespace-nowrap text-sm text-gray-500">
                       {new Date(c.date_debut).toLocaleDateString('fr-FR')}
                     </td>
                     <td className="whitespace-nowrap">
-                      <div className="text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
+                      <div className="text-sm text-gray-500">
                         {getDaysText(daysUntil)}
                       </div>
                     </td>

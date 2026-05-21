@@ -1,6 +1,6 @@
-# 🏗️ Patrick Maçonnerie - Système d'Agents IA
+# 🏗️ Agent BTP Template - Système d'Agents IA
 
-Système automatisé d'agents IA pour gérer les devis et chantiers de Patrick Maçonnerie.
+Système automatisé d'agents IA pour gérer les devis et chantiers dans le secteur BTP.
 
 ## 📋 Fonctionnalités
 
@@ -288,7 +288,7 @@ ALTER TABLE chantiers DISABLE ROW LEVEL SECURITY;
 5. Utilisez PM2 pour gérer le processus :
    ```bash
    npm install -g pm2
-   pm2 start cron.js --name "patrick-agents"
+   pm2 start cron.js --name "agent-btp-template"
    pm2 save
    pm2 startup
    ```
@@ -307,8 +307,8 @@ CMD ["npm", "start"]
 
 Construisez et lancez :
 ```bash
-docker build -t patrick-agents .
-docker run -d --env-file .env patrick-agents
+docker build -t agent-btp-template .
+docker run -d --env-file .env agent-btp-template
 ```
 
 ## 📝 Licence
@@ -317,4 +317,4 @@ MIT
 
 ## 👨‍💻 Auteur
 
-Projet créé pour Patrick Maçonnerie avec ❤️
+Projet template pour entrepreneurs du BTP avec ❤️

@@ -32,7 +32,7 @@ async function logAgentActivity(action, status = 'success', details = null) {
  * @returns {Promise<string>} Message d'alerte généré
  */
 async function genererMessageUrgent(devis, joursAttente) {
-  const prompt = `Tu es l'assistant de Patrick, artisan maçon.
+  const prompt = `Tu es l'assistant d'un entrepreneur du BTP.
 Un devis de ${devis.montant}€ a été envoyé à ${devis.client_nom} il y a ${joursAttente} jours.
 Le client n'a TOUJOURS PAS répondu malgré ce délai important.
 
