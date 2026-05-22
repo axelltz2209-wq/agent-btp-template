@@ -14,14 +14,24 @@
     "test:db": "node test-supabase-connection.js",
     "debug:query": "node debug-devis-query.js"
   },
-  "keywords": ["ai", "agents", "btp", "automation"],
+  "keywords": [
+    "ai",
+    "agents",
+    "btp",
+    "automation"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
     "@supabase/supabase-js": "^2.45.4",
+    "dotenv": "^16.4.7",
     "node-cron": "^3.0.3",
-    "node-telegram-bot-api": "^0.66.0",
-    "dotenv": "^16.4.7"
+    "node-telegram-bot-api": "^0.67.0"
+  },
+  "overrides": {
+    "form-data": "^4.0.1",
+    "qs": "^6.14.1",
+    "tough-cookie": "^5.0.0"
   }
 }

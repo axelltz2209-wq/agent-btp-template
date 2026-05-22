@@ -157,13 +157,13 @@ async function rentabiliteChantierAgent() {
 
 🔴 <b>Critiques :</b> ${alertesDanger.length} chantier${
       alertesDanger.length > 1 ? 's' : ''
-    } (marge < 15%)
+    } (marge &lt; 15%)
 🟠 <b>Attention :</b> ${alertesWarning.length} chantier${
       alertesWarning.length > 1 ? 's' : ''
     } (marge 15-25%)
 🟢 <b>Rentables :</b> ${alertesSuccess.length} chantier${
       alertesSuccess.length > 1 ? 's' : ''
-    } (marge > 25%)
+    } (marge &gt; 25%)
 
 ────────────────────`
 

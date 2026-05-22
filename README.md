@@ -113,6 +113,63 @@ NEXT_PUBLIC_SUPABASE_URL=https://votre-projet.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=votre-cle-supabase
 ```
 
+### 7. Configuration de l'authentification
+
+Le dashboard utilise Supabase Authentication pour sécuriser l'accès. Vous devez créer au moins un utilisateur pour vous connecter.
+
+#### Créer le premier utilisateur via Supabase Dashboard
+
+1. Allez dans votre projet Supabase : [https://supabase.com/dashboard](https://supabase.com/dashboard)
+2. Naviguez vers **Authentication** → **Users** dans le menu de gauche
+3. Cliquez sur **Add user** → **Create new user**
+4. Remplissez les informations :
+   - **Email** : votre email de connexion (ex: `admin@votreentreprise.fr`)
+   - **Password** : votre mot de passe sécurisé
+   - Cochez **Auto Confirm User** pour activer immédiatement le compte
+5. Cliquez sur **Create user**
+
+> ℹ️ **Note** : Vous pouvez créer plusieurs utilisateurs en répétant cette procédure.
+
+#### Alternative : Créer un utilisateur via SQL
+
+Vous pouvez également créer un utilisateur directement via SQL dans l'éditeur Supabase :
+
+```sql
+-- Créer un utilisateur (remplacez l'email et le mot de passe)
+INSERT INTO auth.users (
+  instance_id,
+  id,
+  aud,
+  role,
+  email,
+  encrypted_password,
+  email_confirmed_at,
+  created_at,
+  updated_at,
+  raw_app_meta_data,
+  raw_user_meta_data,
+  is_super_admin,
+  confirmation_token
+)
+VALUES (
+  '00000000-0000-0000-0000-000000000000',
+  gen_random_uuid(),
+  'authenticated',
+  'authenticated',
+  'admin@example.com', -- Votre email
+  crypt('VotreMotDePasse123!', gen_salt('bf')), -- Votre mot de passe
+  NOW(),
+  NOW(),
+  NOW(),
+  '{"provider":"email","providers":["email"]}'::jsonb,
+  '{}'::jsonb,
+  FALSE,
+  ''
+);
+```
+
+> ⚠️ **Important** : La méthode via le dashboard Supabase est plus simple et recommandée.
+
 ## 🎯 Utilisation
 
 ### Démarrer les agents
@@ -162,12 +219,19 @@ npm run dev
 
 Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur.
 
+> 🔐 **Authentification** : Vous serez automatiquement redirigé vers la page de connexion (`/login`). Utilisez l'email et le mot de passe de l'utilisateur que vous avez créé dans Supabase.
+
 #### Mode production
 ```bash
 cd dashboard
 npm run build
 npm start
 ```
+
+#### Accès au dashboard
+- **URL de connexion** : [http://localhost:3000/login](http://localhost:3000/login)
+- **Sécurité** : Toutes les pages sont protégées par authentification
+- **Déconnexion** : Utilisez le bouton "Se déconnecter" en bas de la barre latérale
 
 ## 📁 Structure du Projet
 
