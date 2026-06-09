@@ -104,7 +104,8 @@ async function calculCAAgent() {
 }
 
 // Si le fichier est exécuté directement (pour les tests)
-if (import.meta.url === `file://${process.argv[1]}`) {
+
+if (import.meta.url.endsWith(process.argv[1].replace(/\\/g, '/'))) {
   calculCAAgent()
     .then(() => process.exit(0))
     .catch(() => process.exit(1))
