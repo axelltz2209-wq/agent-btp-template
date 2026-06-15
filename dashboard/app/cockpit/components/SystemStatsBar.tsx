@@ -54,16 +54,16 @@ export function SystemStatsBar() {
       <div
         className={`
           p-4 rounded-xl backdrop-blur-md
-          bg-gradient-to-br from-orange-500/10 to-orange-900/10
-          border border-orange-500/30
+          bg-gradient-to-br from-blue-500/10 to-blue-900/10
+          border border-blue-500/30
           ${styles.fadeInUp}
         `}
         style={{ animationDelay: '0s' }}
       >
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-orange-500/20">
+          <div className="p-2 rounded-lg bg-blue-500/20">
             <svg
-              className="w-6 h-6 text-orange-500"
+              className="w-6 h-6 text-blue-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -78,7 +78,7 @@ export function SystemStatsBar() {
           </div>
           <div>
             <p className="text-sm text-gray-400">Actions aujourd'hui</p>
-            <p className="text-2xl font-bold text-orange-500">{totalActionsToday}</p>
+            <p className="text-2xl font-bold text-blue-400">{totalActionsToday}</p>
           </div>
         </div>
       </div>

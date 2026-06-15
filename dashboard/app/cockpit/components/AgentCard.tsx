@@ -52,10 +52,10 @@ export function AgentCard({ agent, index, onTrigger }: AgentCardProps) {
         ${styles.fadeInUp}
         ${
           isActive
-            ? `${styles.glow} bg-gradient-to-br from-orange-500/10 to-orange-900/10 border-orange-500/50`
+            ? `${styles.glow} bg-gradient-to-br from-blue-500/10 to-blue-900/10 border-blue-500/50`
             : hasError
               ? 'bg-gradient-to-br from-red-500/5 to-red-900/5 border-red-500/30'
-              : 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50 hover:border-orange-500/30'
+              : 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50 hover:border-blue-500/30'
         }
       `}
       style={{
@@ -103,7 +103,7 @@ export function AgentCard({ agent, index, onTrigger }: AgentCardProps) {
 
         <div className="flex justify-between items-center">
           <span className="text-sm text-gray-400">Actions aujourd'hui</span>
-          <span className="text-sm text-orange-400 font-bold">{agent.actionsToday}</span>
+          <span className="text-sm text-blue-400 font-bold">{agent.actionsToday}</span>
         </div>
       </div>
 
@@ -115,7 +115,7 @@ export function AgentCard({ agent, index, onTrigger }: AgentCardProps) {
 
       {/* Sparkline */}
       <div className="mb-4 flex justify-center">
-        <SparklineChart data={agent.activityData} width={200} height={40} color="#f97316" />
+        <SparklineChart data={agent.activityData} width={200} height={40} color="#3b82f6" />
       </div>
 
       {/* Trigger button */}
@@ -124,7 +124,7 @@ export function AgentCard({ agent, index, onTrigger }: AgentCardProps) {
       {/* Scan line effect when active */}
       {isActive && (
         <div
-          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-500 to-transparent opacity-50"
+          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-50"
           style={{
             animation: 'scan 2s linear infinite',
           }}

@@ -60,7 +60,7 @@ export function TriggerButton({ agentName, onTrigger }: TriggerButtonProps) {
               ? 'bg-green-600 text-white'
               : status === 'error'
                 ? 'bg-red-600 text-white'
-                : 'bg-orange-500/20 text-orange-500 hover:bg-orange-500 hover:text-white border border-orange-500/50'
+                : 'bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white border border-blue-500/30'
         }
       `}
     >

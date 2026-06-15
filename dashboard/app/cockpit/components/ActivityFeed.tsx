@@ -75,7 +75,7 @@ export function ActivityFeed() {
                 p-4 rounded-lg backdrop-blur-md
                 bg-gradient-to-br from-gray-800/50 to-gray-900/50
                 border border-gray-700/50
-                hover:border-orange-500/30
+                hover:border-blue-500/30
                 transition-all duration-300
                 ${styles.slideIn}
               `}

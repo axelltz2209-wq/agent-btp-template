@@ -32,7 +32,7 @@ export function BackgroundEffects() {
       {Array.from({ length: 20 }).map((_, i) => (
         <div
           key={i}
-          className={`fixed w-1 h-1 bg-orange-500/30 rounded-full pointer-events-none ${styles.float}`}
+          className={`fixed w-1 h-1 bg-blue-500/20 rounded-full pointer-events-none ${styles.float}`}
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,

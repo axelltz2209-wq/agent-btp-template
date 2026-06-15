@@ -6,14 +6,22 @@ interface ChartsSectionProps {
   chantiers: Chantier[]
 }
 
+const DARK_TOOLTIP_STYLE = {
+  backgroundColor: '#18181f',
+  border: '1px solid #27272a',
+  borderRadius: '8px',
+  fontSize: '12px',
+  boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.6)',
+  fontFamily: 'Inter',
+  color: '#f4f4f5',
+}
+
 export default function ChartsSection({ devis, chantiers }: ChartsSectionProps) {
-  // Prepare data for line chart - Evolution des relances (last 30 days)
   const getLast30DaysData = () => {
     const today = new Date()
     const thirtyDaysAgo = new Date(today)
     thirtyDaysAgo.setDate(today.getDate() - 30)
 
-    // Create array of last 30 days
     const days: { date: string; count: number }[] = []
     for (let i = 0; i < 30; i++) {
       const date = new Date(thirtyDaysAgo)
@@ -24,7 +32,6 @@ export default function ChartsSection({ devis, chantiers }: ChartsSectionProps) 
       })
     }
 
-    // Count devis per day
     devis.forEach((d) => {
       const devisDate = new Date(d.date_envoi)
       if (devisDate >= thirtyDaysAgo && devisDate <= today) {
@@ -38,7 +45,6 @@ export default function ChartsSection({ devis, chantiers }: ChartsSectionProps) 
     return days
   }
 
-  // Prepare data for bar chart - CA previsionnel (next 4 weeks)
   const getNext4WeeksCA = () => {
     const today = new Date()
     const weeks: { week: string; ca: number }[] = []
@@ -57,10 +63,7 @@ export default function ChartsSection({ devis, chantiers }: ChartsSectionProps) 
         }
       })
 
-      weeks.push({
-        week: `S${i + 1}`,
-        ca: weekCA,
-      })
+      weeks.push({ week: `S${i + 1}`, ca: weekCA })
     }
 
     return weeks
@@ -70,72 +73,77 @@ export default function ChartsSection({ devis, chantiers }: ChartsSectionProps) 
   const caData = getNext4WeeksCA()
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {/* Line Chart - Evolution des relances */}
-      <div className="chart-container scale-in">
-        <div className="mb-6">
-          <h3 className="text-lg font-bold text-secondary font-primary mb-2">
-            Évolution des relances
-          </h3>
-          <p className="text-sm text-gray-600">
-            Nombre de devis envoyés par jour (30 derniers jours)
-          </p>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      {/* Line Chart */}
+      <div className="chart-container fade-in">
+        <div className="mb-5">
+          <h3 className="chart-title">Évolution des relances</h3>
+          <p className="chart-description">Devis envoyés par jour (30 derniers jours)</p>
         </div>
-        <ResponsiveContainer width="100%" height={280}>
+        <ResponsiveContainer width="100%" height={260}>
           <LineChart data={relancesData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#E7E5E0" strokeOpacity={0.8} />
-            <XAxis dataKey="date" stroke="#78716C" style={{ fontSize: '11px', fontFamily: 'Inter' }} />
-            <YAxis stroke="#78716C" style={{ fontSize: '11px', fontFamily: 'Inter' }} />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: '#ffffff',
-                border: '1px solid #E7E5E0',
-                borderRadius: '8px',
-                fontSize: '13px',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.08)',
-                fontFamily: 'Inter',
-              }}
+            <CartesianGrid strokeDasharray="3 3" stroke="#27272a" strokeOpacity={0.6} />
+            <XAxis
+              dataKey="date"
+              stroke="#52525b"
+              tick={{ fontSize: 10, fontFamily: 'Inter', fill: '#52525b' }}
+              axisLine={{ stroke: '#27272a' }}
+              tickLine={false}
             />
+            <YAxis
+              stroke="#52525b"
+              tick={{ fontSize: 10, fontFamily: 'Inter', fill: '#52525b' }}
+              axisLine={false}
+              tickLine={false}
+            />
+            <Tooltip contentStyle={DARK_TOOLTIP_STYLE} cursor={{ stroke: '#3f3f46' }} />
             <Line
               type="monotone"
               dataKey="count"
-              stroke="#F97316"
-              strokeWidth={2.5}
-              dot={{ fill: '#F97316', r: 4 }}
-              activeDot={{ r: 6 }}
-              animationDuration={1000}
+              stroke="#3B82F6"
+              strokeWidth={2}
+              dot={false}
+              activeDot={{ r: 5, fill: '#3B82F6', strokeWidth: 0 }}
+              animationDuration={800}
             />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Bar Chart - CA previsionnel */}
-      <div className="chart-container scale-in" style={{ animationDelay: '0.1s' }}>
-        <div className="mb-6">
-          <h3 className="text-lg font-bold text-secondary font-primary mb-2">
-            Chiffre d'affaires prévisionnel
-          </h3>
-          <p className="text-sm text-gray-600">
-            Revenus prévus par semaine (4 prochaines semaines)
-          </p>
+      {/* Bar Chart */}
+      <div className="chart-container fade-in" style={{ animationDelay: '0.1s' }}>
+        <div className="mb-5">
+          <h3 className="chart-title">Chiffre d'affaires prévisionnel</h3>
+          <p className="chart-description">Revenus prévus par semaine (4 prochaines semaines)</p>
         </div>
-        <ResponsiveContainer width="100%" height={280}>
-          <BarChart data={caData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#E7E5E0" strokeOpacity={0.8} />
-            <XAxis dataKey="week" stroke="#78716C" style={{ fontSize: '11px', fontFamily: 'Inter' }} />
-            <YAxis stroke="#78716C" style={{ fontSize: '11px', fontFamily: 'Inter' }} />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: '#ffffff',
-                border: '1px solid #E7E5E0',
-                borderRadius: '8px',
-                fontSize: '13px',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.08)',
-                fontFamily: 'Inter',
-              }}
-              formatter={(value) => `${Number(value).toLocaleString('fr-FR')}€`}
+        <ResponsiveContainer width="100%" height={260}>
+          <BarChart data={caData} barSize={36}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#27272a" strokeOpacity={0.6} />
+            <XAxis
+              dataKey="week"
+              stroke="#52525b"
+              tick={{ fontSize: 11, fontFamily: 'Inter', fill: '#52525b' }}
+              axisLine={{ stroke: '#27272a' }}
+              tickLine={false}
             />
-            <Bar dataKey="ca" fill="#F97316" radius={[8, 8, 0, 0]} animationDuration={1000} />
+            <YAxis
+              stroke="#52525b"
+              tick={{ fontSize: 10, fontFamily: 'Inter', fill: '#52525b' }}
+              axisLine={false}
+              tickLine={false}
+            />
+            <Tooltip
+              contentStyle={DARK_TOOLTIP_STYLE}
+              cursor={{ fill: 'rgba(59, 130, 246, 0.05)' }}
+              formatter={(value) => [`${Number(value).toLocaleString('fr-FR')}€`, 'CA']}
+            />
+            <Bar
+              dataKey="ca"
+              fill="#3B82F6"
+              fillOpacity={0.85}
+              radius={[6, 6, 0, 0]}
+              animationDuration={800}
+            />
           </BarChart>
         </ResponsiveContainer>
       </div>

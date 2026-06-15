@@ -27,8 +27,7 @@ export default function ChantiersTable({ chantiers }: ChantiersTableProps) {
     const now = new Date()
     const start = new Date(dateDebut)
     const diffTime = start.getTime() - now.getTime()
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-    return diffDays
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
   }
 
   const getDaysText = (days: number) => {
@@ -39,13 +38,14 @@ export default function ChantiersTable({ chantiers }: ChantiersTableProps) {
   }
 
   return (
-    <div className="card-btp overflow-hidden scale-in" style={{ animationDelay: '0.1s' }}>
-      <div className="px-6 py-5 border-b border-border">
-        <div className="flex items-center gap-2">
-          <div className="indicator-dot"></div>
-          <h2 className="text-xl font-bold text-secondary font-primary">
-            Chantiers à venir
-          </h2>
+    <div className="card-btp overflow-hidden fade-in" style={{ animationDelay: '0.1s' }}>
+      <div className="px-6 py-4" style={{ borderBottom: '1px solid var(--color-border)' }}>
+        <div className="flex items-center gap-2.5">
+          <div className="indicator-dot" />
+          <h2 className="text-sm font-semibold text-zinc-100">Chantiers à venir</h2>
+          {chantiers.length > 0 && (
+            <span className="ml-auto text-xs text-zinc-600">{chantiers.length} chantiers</span>
+          )}
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -62,7 +62,7 @@ export default function ChantiersTable({ chantiers }: ChantiersTableProps) {
           <tbody>
             {chantiers.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-6 py-12 text-center text-sm text-gray-500">
+                <td colSpan={5} className="px-6 py-12 text-center text-sm text-zinc-600">
                   Aucun chantier trouvé
                 </td>
               </tr>
@@ -72,25 +72,21 @@ export default function ChantiersTable({ chantiers }: ChantiersTableProps) {
                 return (
                   <tr key={c.id}>
                     <td className="whitespace-nowrap">
-                      <div className="text-sm font-semibold text-secondary">
-                        {c.client_nom}
-                      </div>
+                      <div className="text-sm font-medium text-zinc-100">{c.client_nom}</div>
                     </td>
                     <td className="whitespace-nowrap">
-                      <div className="text-sm font-semibold tnum text-secondary">
+                      <div className="text-sm font-semibold tnum text-zinc-100">
                         {Number(c.montant_devis).toLocaleString('fr-FR')}€
                       </div>
                     </td>
-                    <td className="whitespace-nowrap text-sm text-gray-500">
+                    <td className="whitespace-nowrap text-sm text-zinc-500">
                       {new Date(c.date_debut).toLocaleDateString('fr-FR')}
                     </td>
                     <td className="whitespace-nowrap">
-                      <div className="text-sm text-gray-500">
-                        {getDaysText(daysUntil)}
-                      </div>
+                      <div className="text-sm text-zinc-400">{getDaysText(daysUntil)}</div>
                     </td>
                     <td className="whitespace-nowrap">
-                      <span className={getStatusBadge(c.statut)}>
+                      <span className={`badge ${getStatusBadge(c.statut)}`}>
                         {getStatusLabel(c.statut)}
                       </span>
                     </td>
