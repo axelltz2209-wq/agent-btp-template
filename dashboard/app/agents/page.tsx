@@ -64,7 +64,7 @@ const AGENTS: (AgentInfo & { iconType: string; color: string })[] = [
     description: "Relance automatique des devis en attente depuis plus de 3 jours",
     schedule: '20h00 quotidien',
     iconType: 'mail',
-    color: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
+    color: 'text-blue-600 bg-blue-50 border-blue-200',
     icon: null,
   },
   {
@@ -73,7 +73,7 @@ const AGENTS: (AgentInfo & { iconType: string; color: string })[] = [
     description: "Résumé quotidien de l'activité et des chantiers du jour",
     schedule: '7h00 quotidien',
     iconType: 'sun',
-    color: 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20',
+    color: 'text-yellow-600 bg-yellow-50 border-yellow-200',
     icon: null,
   },
   {
@@ -82,7 +82,7 @@ const AGENTS: (AgentInfo & { iconType: string; color: string })[] = [
     description: "Alertes pour les devis en attente depuis plus de 7 jours",
     schedule: 'Toutes les 6h',
     iconType: 'alert',
-    color: 'text-red-400 bg-red-500/10 border-red-500/20',
+    color: 'text-red-600 bg-red-50 border-red-200',
     icon: null,
   },
   {
@@ -91,7 +91,7 @@ const AGENTS: (AgentInfo & { iconType: string; color: string })[] = [
     description: "Calcul du chiffre d'affaires prévu pour la semaine",
     schedule: 'Lundi 8h00',
     iconType: 'chart',
-    color: 'text-green-400 bg-green-500/10 border-green-500/20',
+    color: 'text-green-600 bg-green-50 border-green-200',
     icon: null,
   },
   {
@@ -100,7 +100,7 @@ const AGENTS: (AgentInfo & { iconType: string; color: string })[] = [
     description: "Demande d'avis Google pour les chantiers terminés",
     schedule: '9h00 quotidien',
     iconType: 'star',
-    color: 'text-orange-400 bg-orange-500/10 border-orange-500/20',
+    color: 'text-orange-600 bg-orange-50 border-orange-200',
     icon: null,
   },
   {
@@ -109,7 +109,7 @@ const AGENTS: (AgentInfo & { iconType: string; color: string })[] = [
     description: "Analyse de la rentabilité des chantiers en cours",
     schedule: '21h00 quotidien',
     iconType: 'trending',
-    color: 'text-violet-400 bg-violet-500/10 border-violet-500/20',
+    color: 'text-violet-600 bg-violet-50 border-violet-200',
     icon: null,
   },
 ]
@@ -184,12 +184,12 @@ export default function AgentsPage() {
   }
 
   const getStatusStyle = (status: string | undefined) => {
-    if (!status) return 'bg-zinc-800/60 text-zinc-500'
+    if (!status) return 'bg-slate-100 text-slate-400'
     switch (status) {
-      case 'success': return 'bg-green-500/10 text-green-400 border border-green-500/20'
-      case 'error': return 'bg-red-500/10 text-red-400 border border-red-500/20'
-      case 'warning': return 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20'
-      default: return 'bg-zinc-800/60 text-zinc-500'
+      case 'success': return 'bg-green-50 text-green-700 border border-green-200'
+      case 'error': return 'bg-red-50 text-red-700 border border-red-200'
+      case 'warning': return 'bg-yellow-50 text-yellow-700 border border-yellow-200'
+      default: return 'bg-slate-100 text-slate-400'
     }
   }
 
@@ -199,8 +199,8 @@ export default function AgentsPage() {
         <Sidebar />
         <main className="flex-1 ml-[240px] flex items-center justify-center">
           <div className="text-center">
-            <div className="w-8 h-8 rounded-full border-2 border-zinc-800 border-t-blue-500 animate-spin mx-auto mb-3" />
-            <p className="text-sm text-zinc-600">Chargement...</p>
+            <div className="w-8 h-8 rounded-full border-2 border-slate-200 border-t-blue-500 animate-spin mx-auto mb-3" />
+            <p className="text-sm text-slate-400">Chargement...</p>
           </div>
         </main>
       </div>
@@ -213,8 +213,8 @@ export default function AgentsPage() {
         <Sidebar />
         <main className="flex-1 ml-[240px] flex items-center justify-center p-4">
           <div className="max-w-md card-btp p-8">
-            <h3 className="text-red-400 font-semibold text-base mb-2">Erreur de connexion</h3>
-            <p className="text-zinc-500 text-sm">{error}</p>
+            <h3 className="text-red-600 font-semibold text-base mb-2">Erreur de connexion</h3>
+            <p className="text-slate-500 text-sm">{error}</p>
             <button onClick={fetchLogs} className="mt-6 btn-primary w-full">Réessayer</button>
           </div>
         </main>
@@ -231,8 +231,8 @@ export default function AgentsPage() {
         <div className="page-header px-8 py-6 slide-in-left">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-zinc-100 tracking-tight">Agents IA</h1>
-              <p className="text-sm text-zinc-500 mt-0.5">Surveillance en temps réel des agents autonomes</p>
+              <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Agents IA</h1>
+              <p className="text-sm text-slate-400 mt-0.5">Surveillance en temps réel des agents autonomes</p>
             </div>
             <button onClick={fetchLogs} className="btn-secondary group flex items-center gap-2">
               <svg className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -253,7 +253,7 @@ export default function AgentsPage() {
               return (
                 <div
                   key={agent.name}
-                  className="card-btp p-5 hover:border-zinc-700 transition-all duration-150 fade-in"
+                  className="card-btp p-5 hover:border-slate-300 transition-all duration-150 fade-in"
                   style={{ animationDelay: `${i * 0.07}s` }}
                 >
                   {/* Header */}
@@ -263,43 +263,43 @@ export default function AgentsPage() {
                         <AgentIcon type={agent.iconType} />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-zinc-100 text-sm leading-tight">{agent.displayName}</h3>
-                        <p className="text-xs text-zinc-600 mt-0.5">{agent.schedule}</p>
+                        <h3 className="font-semibold text-slate-900 text-sm leading-tight">{agent.displayName}</h3>
+                        <p className="text-xs text-slate-400 mt-0.5">{agent.schedule}</p>
                       </div>
                     </div>
-                    <span className={`px-2 py-0.5 rounded text-xs font-semibold ${lastLog ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' : 'bg-zinc-800/60 text-zinc-600'}`}>
+                    <span className={`px-2 py-0.5 rounded text-xs font-semibold ${lastLog ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-slate-100 text-slate-400'}`}>
                       {lastLog ? 'ACTIF' : 'PAUSE'}
                     </span>
                   </div>
 
-                  <p className="text-xs text-zinc-500 mb-4 leading-relaxed">{agent.description}</p>
+                  <p className="text-xs text-slate-500 mb-4 leading-relaxed">{agent.description}</p>
 
                   {/* Stats */}
-                  <div className="space-y-2.5 pt-4" style={{ borderTop: '1px solid #1f1f23' }}>
+                  <div className="space-y-2.5 pt-4" style={{ borderTop: '1px solid #E2E8F0' }}>
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-zinc-600">Dernière exécution</span>
-                      <span className="font-medium text-zinc-400">
+                      <span className="text-slate-400">Dernière exécution</span>
+                      <span className="font-medium text-slate-600">
                         {lastLog
                           ? new Date(lastLog.created_at).toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
                           : 'Jamais'}
                       </span>
                     </div>
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-zinc-600">Prochaine exécution</span>
-                      <span className="font-medium text-zinc-400">{getNextRun(agent.schedule)}</span>
+                      <span className="text-slate-400">Prochaine exécution</span>
+                      <span className="font-medium text-slate-600">{getNextRun(agent.schedule)}</span>
                     </div>
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-zinc-600">Actions aujourd'hui</span>
-                      <span className="font-bold text-blue-400">{actionsToday}</span>
+                      <span className="text-slate-400">Actions aujourd'hui</span>
+                      <span className="font-bold text-blue-600">{actionsToday}</span>
                     </div>
 
                     {lastLog && (
-                      <div className="pt-3" style={{ borderTop: '1px solid #1f1f23' }}>
+                      <div className="pt-3" style={{ borderTop: '1px solid #E2E8F0' }}>
                         <div className="flex items-start gap-2">
                           <span className={`px-2 py-0.5 rounded text-xs font-medium flex-shrink-0 ${getStatusStyle(lastLog.status)}`}>
                             {lastLog.status.toUpperCase()}
                           </span>
-                          <p className="text-xs text-zinc-500 line-clamp-2 flex-1">{lastLog.action}</p>
+                          <p className="text-xs text-slate-500 line-clamp-2 flex-1">{lastLog.action}</p>
                         </div>
                       </div>
                     )}
@@ -311,28 +311,25 @@ export default function AgentsPage() {
 
           {/* Activity Feed */}
           <div className="card-btp overflow-hidden fade-in">
-            <div className="px-6 py-4" style={{ borderBottom: '1px solid #27272a' }}>
+            <div className="px-6 py-4" style={{ borderBottom: '1px solid #E2E8F0' }}>
               <div className="flex items-center gap-2.5">
                 <div className="indicator-dot" />
-                <h2 className="text-sm font-semibold text-zinc-100">Activité récente</h2>
-                <span className="ml-auto text-xs text-zinc-600">20 dernières actions</span>
+                <h2 className="text-sm font-semibold text-slate-800">Activité récente</h2>
+                <span className="ml-auto text-xs text-slate-400">20 dernières actions</span>
               </div>
             </div>
 
-            <div className="divide-y" style={{ '--tw-divide-opacity': 1 } as React.CSSProperties}>
+            <div className="divide-y divide-slate-100">
               {logs.slice(0, 20).map((log) => {
                 const agent = AGENTS.find((a) => a.name === log.agent_name)
 
                 return (
                   <div
                     key={log.id}
-                    className="px-6 py-4 transition-colors duration-150"
-                    style={{ borderColor: '#1f1f23' }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = '#18181f')}
-                    onMouseLeave={(e) => (e.currentTarget.style.background = '')}
+                    className="px-6 py-4 transition-colors duration-150 hover:bg-slate-50"
                   >
                     <div className="flex items-start gap-4">
-                      <div className={`w-8 h-8 rounded-lg border flex items-center justify-center flex-shrink-0 ${agent?.color || 'text-zinc-400 bg-zinc-800/60 border-zinc-700'}`}>
+                      <div className={`w-8 h-8 rounded-lg border flex items-center justify-center flex-shrink-0 ${agent?.color || 'text-slate-400 bg-slate-50 border-slate-200'}`}>
                         {agent ? <AgentIcon type={agent.iconType} /> : (
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -341,13 +338,13 @@ export default function AgentsPage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="font-medium text-zinc-200 text-sm">{agent?.displayName || log.agent_name}</span>
+                          <span className="font-medium text-slate-900 text-sm">{agent?.displayName || log.agent_name}</span>
                           <span className={`px-2 py-0.5 rounded text-xs font-medium ${getStatusStyle(log.status)}`}>
                             {log.status}
                           </span>
                         </div>
-                        <p className="text-sm text-zinc-500 mb-1 line-clamp-1">{log.action}</p>
-                        <div className="flex items-center gap-3 text-xs text-zinc-700">
+                        <p className="text-sm text-slate-500 mb-1 line-clamp-1">{log.action}</p>
+                        <div className="flex items-center gap-3 text-xs text-slate-400">
                           <span>
                             {new Date(log.created_at).toLocaleString('fr-FR', {
                               day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit',
@@ -367,7 +364,7 @@ export default function AgentsPage() {
 
               {logs.length === 0 && (
                 <div className="px-6 py-16 text-center">
-                  <p className="text-zinc-600 text-sm">Aucune activité enregistrée pour le moment</p>
+                  <p className="text-slate-400 text-sm">Aucune activité enregistrée pour le moment</p>
                 </div>
               )}
             </div>

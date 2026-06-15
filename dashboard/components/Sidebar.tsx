@@ -10,7 +10,6 @@ export default function Sidebar() {
   const router = useRouter()
 
   const isActive = (path: string) => pathname === path
-
   const getLinkClasses = (path: string) => `nav-item ${isActive(path) ? 'active' : ''}`
 
   const handleLogout = async () => {
@@ -25,31 +24,25 @@ export default function Sidebar() {
 
   return (
     <aside
-      className="fixed left-0 top-0 h-screen w-[240px] flex flex-col slide-in-left"
-      style={{
-        background: '#09090b',
-        borderRight: '1px solid #1f1f23',
-      }}
+      className="fixed left-0 top-0 h-screen w-[240px] flex flex-col bg-white slide-in-left"
+      style={{ borderRight: '1px solid #E2E8F0' }}
     >
       {/* Logo */}
-      <div className="h-16 flex items-center px-5" style={{ borderBottom: '1px solid #1f1f23' }}>
+      <div className="h-16 flex items-center px-5" style={{ borderBottom: '1px solid #F1F5F9' }}>
         <div className="flex items-center gap-3">
           <div
             className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-            style={{
-              background: 'rgba(59, 130, 246, 0.15)',
-              border: '1px solid rgba(59, 130, 246, 0.3)',
-            }}
+            style={{ background: '#3B82F6', boxShadow: '0 2px 8px rgba(59,130,246,0.3)' }}
           >
-            <svg className="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
             </svg>
           </div>
           <div className="min-w-0">
-            <div className="text-sm font-semibold text-zinc-100 truncate leading-tight">
+            <div className="text-sm font-semibold text-slate-900 truncate leading-tight">
               {companyConfig.name}
             </div>
-            <div className="text-xs text-zinc-600 leading-tight">Dashboard</div>
+            <div className="text-xs text-slate-400 leading-tight">Dashboard</div>
           </div>
         </div>
       </div>
@@ -57,7 +50,7 @@ export default function Sidebar() {
       {/* Navigation */}
       <nav className="flex-1 px-3 py-4 overflow-y-auto">
         <div className="mb-2 px-3">
-          <span className="text-xs font-semibold text-zinc-700 uppercase tracking-wider">Menu</span>
+          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Menu</span>
         </div>
         <div className="space-y-0.5">
           <Link href="/" className={getLinkClasses('/')}>
@@ -87,10 +80,10 @@ export default function Sidebar() {
             Chantiers
           </Link>
 
-          <div className="my-3" style={{ borderTop: '1px solid #1f1f23' }} />
+          <div className="my-3" style={{ borderTop: '1px solid #F1F5F9' }} />
 
           <div className="mb-2 px-3">
-            <span className="text-xs font-semibold text-zinc-700 uppercase tracking-wider">Automatisation</span>
+            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Automatisation</span>
           </div>
 
           <Link href="/agents" className={getLinkClasses('/agents')}>
@@ -104,9 +97,7 @@ export default function Sidebar() {
 
           <Link href="/cockpit" className={getLinkClasses('/cockpit')}>
             <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                d="M13 10V3L4 14h7v7l9-11h-7z"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
             Cockpit
           </Link>
@@ -114,28 +105,28 @@ export default function Sidebar() {
       </nav>
 
       {/* User Footer */}
-      <div className="px-3 py-4" style={{ borderTop: '1px solid #1f1f23' }}>
+      <div className="px-3 py-4" style={{ borderTop: '1px solid #F1F5F9' }}>
         <div
-          className="flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 cursor-pointer transition-all"
-          style={{ background: 'rgba(39, 39, 42, 0.4)' }}
+          className="flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1"
+          style={{ background: '#F8FAFC' }}
         >
           <div
-            className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold text-zinc-300"
-            style={{ background: '#27272a' }}
+            className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold text-white"
+            style={{ background: '#3B82F6' }}
           >
             {companyConfig.avatar.slice(0, 2)}
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-sm font-medium text-zinc-200 truncate leading-tight">
+            <div className="text-sm font-medium text-slate-800 truncate leading-tight">
               {companyConfig.owner}
             </div>
-            <div className="text-xs text-zinc-600 leading-tight">Administrateur</div>
+            <div className="text-xs text-slate-400 leading-tight">Administrateur</div>
           </div>
         </div>
 
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-zinc-600 hover:text-red-400 hover:bg-red-500/8 group"
+          className="w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-slate-400 hover:text-red-500 hover:bg-red-50 group"
         >
           <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}

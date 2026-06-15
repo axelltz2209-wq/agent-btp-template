@@ -6,14 +6,14 @@ interface ChartsSectionProps {
   chantiers: Chantier[]
 }
 
-const DARK_TOOLTIP_STYLE = {
-  backgroundColor: '#18181f',
-  border: '1px solid #27272a',
+const LIGHT_TOOLTIP_STYLE = {
+  backgroundColor: '#FFFFFF',
+  border: '1px solid #E2E8F0',
   borderRadius: '8px',
   fontSize: '12px',
-  boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.6)',
+  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.07)',
   fontFamily: 'Inter',
-  color: '#f4f4f5',
+  color: '#0F172A',
 }
 
 export default function ChartsSection({ devis, chantiers }: ChartsSectionProps) {
@@ -36,9 +36,7 @@ export default function ChartsSection({ devis, chantiers }: ChartsSectionProps) 
       const devisDate = new Date(d.date_envoi)
       if (devisDate >= thirtyDaysAgo && devisDate <= today) {
         const dayIndex = Math.floor((devisDate.getTime() - thirtyDaysAgo.getTime()) / (1000 * 60 * 60 * 24))
-        if (dayIndex >= 0 && dayIndex < 30) {
-          days[dayIndex].count++
-        }
+        if (dayIndex >= 0 && dayIndex < 30) days[dayIndex].count++
       }
     })
 
@@ -58,9 +56,7 @@ export default function ChartsSection({ devis, chantiers }: ChartsSectionProps) 
       let weekCA = 0
       chantiers.forEach((c) => {
         const startDate = new Date(c.date_debut)
-        if (startDate >= weekStart && startDate <= weekEnd) {
-          weekCA += Number(c.montant_devis)
-        }
+        if (startDate >= weekStart && startDate <= weekEnd) weekCA += Number(c.montant_devis)
       })
 
       weeks.push({ week: `S${i + 1}`, ca: weekCA })
@@ -82,21 +78,21 @@ export default function ChartsSection({ devis, chantiers }: ChartsSectionProps) 
         </div>
         <ResponsiveContainer width="100%" height={260}>
           <LineChart data={relancesData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#27272a" strokeOpacity={0.6} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" strokeOpacity={0.8} />
             <XAxis
               dataKey="date"
-              stroke="#52525b"
-              tick={{ fontSize: 10, fontFamily: 'Inter', fill: '#52525b' }}
-              axisLine={{ stroke: '#27272a' }}
+              stroke="#CBD5E1"
+              tick={{ fontSize: 10, fontFamily: 'Inter', fill: '#94A3B8' }}
+              axisLine={{ stroke: '#E2E8F0' }}
               tickLine={false}
             />
             <YAxis
-              stroke="#52525b"
-              tick={{ fontSize: 10, fontFamily: 'Inter', fill: '#52525b' }}
+              stroke="#CBD5E1"
+              tick={{ fontSize: 10, fontFamily: 'Inter', fill: '#94A3B8' }}
               axisLine={false}
               tickLine={false}
             />
-            <Tooltip contentStyle={DARK_TOOLTIP_STYLE} cursor={{ stroke: '#3f3f46' }} />
+            <Tooltip contentStyle={LIGHT_TOOLTIP_STYLE} cursor={{ stroke: '#E2E8F0' }} />
             <Line
               type="monotone"
               dataKey="count"
@@ -118,32 +114,26 @@ export default function ChartsSection({ devis, chantiers }: ChartsSectionProps) 
         </div>
         <ResponsiveContainer width="100%" height={260}>
           <BarChart data={caData} barSize={36}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#27272a" strokeOpacity={0.6} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" strokeOpacity={0.8} />
             <XAxis
               dataKey="week"
-              stroke="#52525b"
-              tick={{ fontSize: 11, fontFamily: 'Inter', fill: '#52525b' }}
-              axisLine={{ stroke: '#27272a' }}
+              stroke="#CBD5E1"
+              tick={{ fontSize: 11, fontFamily: 'Inter', fill: '#94A3B8' }}
+              axisLine={{ stroke: '#E2E8F0' }}
               tickLine={false}
             />
             <YAxis
-              stroke="#52525b"
-              tick={{ fontSize: 10, fontFamily: 'Inter', fill: '#52525b' }}
+              stroke="#CBD5E1"
+              tick={{ fontSize: 10, fontFamily: 'Inter', fill: '#94A3B8' }}
               axisLine={false}
               tickLine={false}
             />
             <Tooltip
-              contentStyle={DARK_TOOLTIP_STYLE}
-              cursor={{ fill: 'rgba(59, 130, 246, 0.05)' }}
+              contentStyle={LIGHT_TOOLTIP_STYLE}
+              cursor={{ fill: 'rgba(59, 130, 246, 0.04)' }}
               formatter={(value) => [`${Number(value).toLocaleString('fr-FR')}€`, 'CA']}
             />
-            <Bar
-              dataKey="ca"
-              fill="#3B82F6"
-              fillOpacity={0.85}
-              radius={[6, 6, 0, 0]}
-              animationDuration={800}
-            />
+            <Bar dataKey="ca" fill="#3B82F6" fillOpacity={0.85} radius={[6, 6, 0, 0]} animationDuration={800} />
           </BarChart>
         </ResponsiveContainer>
       </div>
